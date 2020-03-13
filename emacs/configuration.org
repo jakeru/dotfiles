@@ -1,0 +1,325 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Jakob Ruhe
+#+EMAIL: jakob.ruhe@gmail.com
+#+OPTIONS: toc:nil num:nil
+#+STARTUP: showall
+
+* Special thanks to
+This file has been inspired by:
+Harry R. Schwartz
+https://github.com/hrs/dotfiles
+
+and my college
+Joakim Jalap:
+https://github.com/jockej/emacs-conf
+
+* Configuration setup
+#+begin_src emacs-lisp
+(setq emacs-conf-dir (file-name-as-directory "~/prog/dot_files/emacs"))
+#+end_src
+
+#+RESULTS:
+: ~/prog/dot_files/emacs/
+
+* Configure =use-package=
+
+Use =use-package= to install and configure packages.
+
+#+begin_src emacs-lisp
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t)
+#+end_src
+
+Always compile packages, and use the newest version available.
+
+#+begin_src emacs-lisp
+  (use-package auto-compile
+    :config (auto-compile-on-load-mode))
+
+  (setq load-prefer-newer t)
+#+end_src
+
+* Use sensible defaults
+
+#+begin_src emacs-lisp
+  (load-file (concat emacs-conf-dir "sensible-defaults.el"))
+  (sensible-defaults/backup-to-temp-directory)
+  ;; (sensible-defaults/open-files-from-home-directory)
+  (sensible-defaults/increase-gc-threshold)
+  (sensible-defaults/delete-trailing-whitespace)
+  (sensible-defaults/treat-camelcase-as-separate-words)
+  (sensible-defaults/automatically-follow-symlinks)
+  (sensible-defaults/make-scripts-executable)
+  (sensible-defaults/single-space-after-periods)
+  (sensible-defaults/offer-to-create-parent-directories-on-save)
+  (sensible-defaults/apply-changes-to-highlighted-region)
+  (sensible-defaults/overwrite-selected-text)
+  (sensible-defaults/ensure-that-files-end-with-newline)
+  ;; (sensible-defaults/confirm-closing-emacs)
+  (sensible-defaults/quiet-startup)
+  (sensible-defaults/make-dired-file-sizes-human-readable)
+  (sensible-defaults/shorten-yes-or-no)
+  (sensible-defaults/always-highlight-code)
+  (sensible-defaults/refresh-buffers-when-files-change)
+  (sensible-defaults/show-matching-parens)
+  ;; (sensible-defaults/flash-screen-instead-of-ringing-bell)
+  (sensible-defaults/set-default-line-length-to 80)
+  (sensible-defaults/open-clicked-files-in-same-frame-on-mac)
+  (sensible-defaults/yank-to-point-on-mouse-click)
+  ;; (sensible-defaults/use-all-keybindings)
+#+end_src
+
+* Find out where I am
+
+#+begin_src emacs-lisp
+ (defun jr-is-home-p ()
+       (string-suffix-p "MacBook-Air.home" system-name t))
+ (defun jr-is-elux-p ()
+       (string-suffix-p "electrolux" system-name t))
+#+end_src
+
+* Personal information
+
+#+begin_src emacs-lisp
+(setq user-full-name "Jakob Ruhe")
+(setq user-mail-address
+  (if (jr-is-elux-p)
+    "jakob.ruhe@electrolux.com"
+    "jakob.ruhe@gmail.com"))
+#+end_src
+
+* Add resources directory to load path
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/resources/")
+#+end_src
+
+* Disable visual bell
+
+#+begin_src emacs-lisp
+(setq ring-bell-function 'ignore)
+#+end_src
+
+* Highlight modified lines
+#+begin_src emacs-lisp
+(use-package diff-hl
+  :config
+  (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+  (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
+#+end_src
+
+* Project management
+
+** =company=
+
+Use =company-mode= everywhere.
+
+#+begin_src emacs-lisp
+  (use-package company)
+  (add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+
+Use =M-/= for completion.
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "M-/") 'company-complete-common)
+#+end_src
+
+** =dumb-jump=
+
+#+begin_src emacs-lisp
+  (use-package dumb-jump
+    :config
+;;    (define-key evil-normal-state-map (kbd "M-.") 'dumb-jump-go)
+    (setq dumb-jump-selector 'ivy))
+#+end_src
+
+** =flycheck=
+
+#+begin_src emacs-lisp
+   (use-package let-alist)
+   (use-package flycheck)
+#+end_src
+
+** =magit=
+#+begin_src emacs-lisp
+  (use-package magit
+    :bind
+    ("C-x g" . magit-status)
+    :config
+    (use-package with-editor)
+    (setq git-commit-summary-max-length 50))
+#+end_src
+
+* Editing
+
+Prefer UTF-8
+#+begin_src emacs-lisp
+(prefer-coding-system 'utf-8)
+#+end_src
+
+Require a newline at the end of files.
+#+BEGIN_SRC emacs-lisp
+(setq-default require-final-newline t)
+#+END_SRC
+
+Delete with C+h
+#+begin_src emacs-lisp
+(define-key global-map "\C-h" 'backward-delete-char)
+#+end_src
+
+   #+BEGIN_SRC emacs-lisp
+     (setq column-number-mode t)
+   #+END_SRC
+
+** Spell checking
+
+#+begin_src emacs-lisp
+  (use-package flyspell
+    :config
+    (add-hook 'text-mode-hook 'turn-on-auto-fill)
+    (add-hook 'gfm-mode-hook 'flyspell-mode)
+    (add-hook 'org-mode-hook 'flyspell-mode)
+
+    (add-hook 'git-commit-mode-hook 'flyspell-mode)
+    (add-hook 'mu4e-compose-mode-hook 'flyspell-mode))
+#+end_src
+
+** Insert date and time
+With inspiration from:
+https://stackoverflow.com/questions/251908/how-can-i-insert-current-date-and-time-into-a-file-using-emacs
+
+#+begin_src emacs-lisp
+(defun jr-day-of-week (dt)
+  "Returns the day of the week, 1 to 7. Monday is 1."
+  (string-to-number (format-time-string "%u" dt))
+)
+
+(defun jr-day-of-week-se (dt)
+  "Returns the day of the week, in Swedish"
+  (pcase (jr-day-of-week dt)
+    (1 "Måndag")
+    (2 "Tisdag")
+    (3 "Onsdag")
+    (4 "Torsdag")
+    (5 "Fredag")
+    (6 "Lördag")
+    (7 "Söndag")
+  )
+)
+
+(defun insert-current-date-time ()
+  "insert the current date and time into the current buffer."
+  (interactive)
+  (let ((now (current-time)))
+     (insert (format-time-string "%Y-%m-%d " now))
+     (insert (jr-day-of-week-se now))
+     (insert (format-time-string " %H:%M" now))
+     (insert "\n")
+  )
+)
+
+(defun insert-current-time ()
+  "insert the current time into the current buffer."
+       (interactive)
+       (insert (format-time-string "%H:%M" (current-time)))
+       )
+
+(global-set-key "\C-cd" 'insert-current-date-time)
+(global-set-key "\C-ct" 'insert-current-time)
+#+end_src
+
+** Completion
+
+#+BEGIN_SRC emacs-lisp
+(require 'ido)
+(ido-mode 1)
+(ido-everywhere)
+(setq ido-use-faces nil)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package flx-ido
+  :config
+  (flx-ido-mode 1)
+  (setq ido-enable-flex-matching t)
+  (flx-ido-mode 1))
+#+END_SRC
+
+** Backup
+
+#+BEGIN_SRC emacs-lisp
+(setq
+ backup-by-copying t
+ backup-directory-alist
+ '(("." . "~/.emacs-backups"))
+ delete-old-versions t
+ kept-new-versions 4
+ kept-old-versions 2
+ version-control t)
+#+END_SRC
+
+* Eshell
+#+BEGIN_SRC emacs-lisp
+(use-package eshell)
+#+END_SRC
+
+* Non programming editing modes
+
+** Markdown
+
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :mode "\\.md\\'")
+#+END_SRC
+
+* Programming
+
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :config
+    (global-company-mode)
+    (add-to-list 'company-backends #'company-gtags)
+    :bind (:map company-active-map ("C-d" . company-show-doc-buffer)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet)
+#+END_SRC
+
+** Debugging
+
+#+BEGIN_SRC emacs-lisp
+(setq gdb-many-windows t)
+#+END_SRC
+
+* Version control
+** Git
+
+     Use magit for git, with support for github pull requests.
+     #+BEGIN_SRC emacs-lisp
+       (use-package magit
+         :config
+         (setq magit-last-seen-setup-instructions "1.4.0"
+               magit-push-always-verify nil
+               magit-revert-buffers 'silent)
+         :bind
+         ("H-g" . magit-status))
+     #+END_SRC
+
+     Modes for editing git config files.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package gitconfig-mode
+    :defer t)
+
+  (use-package gitignore-mode
+    :defer t)
+#+END_SRC
+
+* Org
+
+Do not indent lines.
+#+BEGIN_SRC emacs-lisp
+(setq org-adapt-indentation nil)
+#+END_SRC
