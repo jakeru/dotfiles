@@ -27,3 +27,6 @@ do
 done
 
 echo Operation completed.
+
+echo Setting up inputrc...
+cp inputrc/dot.inputrc $HOME/.inputrc
