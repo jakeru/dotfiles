@@ -3,7 +3,7 @@ st=status
 rebi=rebase -i origin/master
 rebc=rebase --continue
 ca=commit --amend
-reflogd=git reflog --date=iso
+reflogd=reflog --date=iso
 
 [user]
 name = Jakob Ruhe
