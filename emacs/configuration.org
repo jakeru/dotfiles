@@ -13,14 +13,6 @@ and my college
 Joakim Jalap:
 https://github.com/jockej/emacs-conf
 
-* Configuration setup
-#+begin_src emacs-lisp
-(setq emacs-conf-dir (file-name-as-directory "~/prog/dot_files/emacs"))
-#+end_src
-
-#+RESULTS:
-: ~/prog/dot_files/emacs/
-
 * Configure =use-package=
 
 Use =use-package= to install and configure packages.
