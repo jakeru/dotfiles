@@ -55,7 +55,7 @@ Always compile packages, and use the newest version available.
   (sensible-defaults/refresh-buffers-when-files-change)
   (sensible-defaults/show-matching-parens)
   ;; (sensible-defaults/flash-screen-instead-of-ringing-bell)
-  (sensible-defaults/set-default-line-length-to 80)
+  (sensible-defaults/set-default-line-length-to 72)
   (sensible-defaults/open-clicked-files-in-same-frame-on-mac)
   (sensible-defaults/yank-to-point-on-mouse-click)
   ;; (sensible-defaults/use-all-keybindings)
