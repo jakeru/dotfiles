@@ -42,7 +42,7 @@ Always compile packages, and use the newest version available.
 * Use sensible defaults
 
 #+begin_src emacs-lisp
-  (load-file (concat emacs-conf-dir "sensible-defaults.el"))
+  (load-file "~/.emacs.d/sensible-defaults.el")
   (sensible-defaults/backup-to-temp-directory)
   ;; (sensible-defaults/open-files-from-home-directory)
   (sensible-defaults/increase-gc-threshold)
