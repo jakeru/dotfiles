@@ -17,7 +17,7 @@ function symlink() {
 	    echo Symlink $LINK_NAME already points to $TARGET
     else
 	    echo Creating symlink $LINK_NAME to $TARGET...
-	    ln --symbolic "$TARGET" "$LINK_NAME"
+	    ln -s "$TARGET" "$LINK_NAME"
     fi
 }
 
