@@ -13,3 +13,24 @@ tree = log --graph --decorate --pretty=oneline --abbrev-commit
 [user]
 name = Jakob Ruhe
 email = jakob.ruhe@gmail.com
+
+[color]
+branch = auto
+diff = auto
+status = auto
+
+[color "branch"]
+current = yellow reverse
+local = yellow
+remote = green
+
+[color "diff"]
+meta = yellow bold
+frag = magenta bold
+old = red
+new = green
+
+[color "status"]
+added = yellow
+changed = green
+untracked = cyan
