@@ -59,6 +59,7 @@ function setup_inputrc() {
 setup_git() {
     echo Setting up git...
     symlink "$SCRIPT_DIR/git/dot.gitconfig" "$HOME/.gitconfig"
+    symlink "$SCRIPT_DIR/git/dot.gitexcludes" "$HOME/.gitexcludes"
 }
 
 # Main

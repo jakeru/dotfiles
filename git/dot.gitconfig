@@ -1,9 +1,14 @@
+[core]
+excludesfile = "~/.gitexcludes"
+editor = emacs
+
 [alias]
 st=status
 rebi=rebase -i origin/master
 rebc=rebase --continue
 ca=commit --amend
 reflogd=reflog --date=iso
+tree = log --graph --decorate --pretty=oneline --abbrev-commit
 
 [user]
 name = Jakob Ruhe
