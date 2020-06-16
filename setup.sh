@@ -41,6 +41,18 @@ function makedir() {
     fi
 }
 
+# Append something to a file if it does not already exists
+function append_if_not_present() {
+    declare FILE=$1
+    declare LINE=$2
+    if grep -xsqF -- "$LINE" "$FILE"; then
+        echo Line \'$LINE\' is already present in $FILE
+    else
+        echo Appending line \'$LINE\' to file $FILE
+        echo "$LINE" >> "$FILE"
+    fi
+}
+
 function setup_emacs() {
     echo Setting up Emacs...
     makedir "$HOME/.emacs.d"
@@ -68,6 +80,13 @@ function setup_vscode() {
     symlink "$SCRIPT_DIR/vscode/settings.json" "$HOME/.config/Code/User/settings.json"
 }
 
+function setup_bash() {
+    echo Setting up bash...
+    append_if_not_present "$HOME/.bashrc" 'for file in ~/.bashrc.d/*.sh; do source $file; done'
+    makedir "$HOME/.bashrc.d"
+    symlink "$SCRIPT_DIR/bash/misc.sh" "$HOME/.bashrc.d/misc.sh"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -77,5 +96,6 @@ setup_emacs
 setup_inputrc
 setup_git
 setup_vscode
+setup_bash
 
 echo Operation completed.
