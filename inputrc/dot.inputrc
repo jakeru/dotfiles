@@ -1,5 +1,12 @@
 $include /etc/inputrc
 ## arrow up
 "\e[A":history-search-backward
+
+## ctrl+p
+"\020":history-search-backward
+
 ## arrow down
 "\e[B":history-search-forward
+
+## ctrl+n
+"\016":history-search-forward
