@@ -32,6 +32,7 @@ function download() {
     fi
 }
 
+# Make a directory
 function makedir() {
     declare DIR=$1
     if [[ ! -d "$DIR" ]]; then
@@ -44,7 +45,7 @@ function setup_emacs() {
     echo Setting up Emacs...
     makedir "$HOME/.emacs.d"
     download \
-        "https://raw.githubusercontent.com/hrs/sensible-defaults.el/master/sensible-defaults.el" \
+        "https://raw.githubusercontent.com/hrs/sensible-defaults.el/main/sensible-defaults.el" \
         "downloads/emacs/sensible-defaults.el"
     symlink "$SCRIPT_DIR/emacs/init.el" "$HOME/.emacs.d/init.el"
     symlink "$SCRIPT_DIR/emacs/configuration.org" "$HOME/.emacs.d/configuration.org"
@@ -56,7 +57,7 @@ function setup_inputrc() {
     symlink "$SCRIPT_DIR/inputrc/dot.inputrc" "$HOME/.inputrc"
 }
 
-setup_git() {
+function setup_git() {
     echo Setting up git...
     symlink "$SCRIPT_DIR/git/dot.gitconfig" "$HOME/.gitconfig"
     symlink "$SCRIPT_DIR/git/dot.gitexcludes" "$HOME/.gitexcludes"
