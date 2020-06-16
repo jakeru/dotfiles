@@ -87,6 +87,14 @@ function setup_bash() {
     symlink "$SCRIPT_DIR/bash/misc.sh" "$HOME/.bashrc.d/misc.sh"
 }
 
+function setup_phist() {
+    echo Setting up phist..
+    download \
+        "https://raw.githubusercontent.com/jakeru/phist/master/phist.sh" \
+        "downloads/phist/phist.sh"
+    symlink "$SCRIPT_DIR/downloads/phist/phist.sh" "$HOME/.bashrc.d/phist.sh"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -97,5 +105,6 @@ setup_inputrc
 setup_git
 setup_vscode
 setup_bash
+setup_phist
 
 echo Operation completed.
