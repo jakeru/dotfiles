@@ -1,0 +1,9 @@
+{
+    "editor.renderControlCharacters": true,
+    "files.trimTrailingWhitespace": true,
+    "C_Cpp.updateChannel": "Insiders",
+    "window.zoomLevel": 0,
+    "[plaintext]": {
+        "editor.wordBasedSuggestions": false,
+    },
+}

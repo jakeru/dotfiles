@@ -62,6 +62,11 @@ setup_git() {
     symlink "$SCRIPT_DIR/git/dot.gitexcludes" "$HOME/.gitexcludes"
 }
 
+function setup_vscode() {
+    echo Setting up Visual Studio Code...
+    symlink "$SCRIPT_DIR/vscode/settings.json" "$HOME/.config/Code/User/settings.json"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -70,5 +75,6 @@ SCRIPT_DIR="$(dirname $SCRIPT)"
 setup_emacs
 setup_inputrc
 setup_git
+setup_vscode
 
 echo Operation completed.
