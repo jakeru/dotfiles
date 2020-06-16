@@ -177,6 +177,26 @@ Delete with C+h
     (add-hook 'mu4e-compose-mode-hook 'flyspell-mode))
 #+end_src
 
+Enable spell checking in text-mode.
+#+begin_src emacs-lisp
+(dolist (hook '(text-mode-hook))
+    (add-hook hook (lambda () (flyspell-mode 1))))
+#+end_src
+
+Enable spell checking in change-log-mode.
+#+begin_src emacs-lisp
+(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+    (add-hook hook (lambda () (flyspell-mode -1))))
+#+end_src
+
+Enable spell checking for Python files.
+#+begin_src emacs-lisp
+(add-hook 'python-mode-hook
+    (lambda ()
+    (flyspell-prog-mode)
+    ))
+#+end_src
+
 ** Insert date and time
 With inspiration from:
 https://stackoverflow.com/questions/251908/how-can-i-insert-current-date-and-time-into-a-file-using-emacs
