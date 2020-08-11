@@ -1,6 +1,6 @@
 [core]
 excludesfile = "~/.gitexcludes"
-editor = emacs
+editor = /usr/bin/emacsclient --tty --create-frame
 
 [alias]
 st=status
