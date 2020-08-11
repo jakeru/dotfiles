@@ -95,6 +95,11 @@ function setup_phist() {
     symlink "$SCRIPT_DIR/downloads/phist/phist.sh" "$HOME/.bashrc.d/phist.sh"
 }
 
+function setup_i3() {
+    echo Setting up i3...
+    symlink "$SCRIPT_DIR/i3/config" "$HOME/.config/i3/config"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -106,5 +111,5 @@ setup_git
 setup_vscode
 setup_bash
 setup_phist
-
+setup_i3
 echo Operation completed.
