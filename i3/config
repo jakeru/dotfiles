@@ -179,3 +179,17 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+# Lock
+bindsym $mod+Escape exec "i3lock --color=000000"
+
+# move focused window between monitors
+bindsym $mod+Control+l move container to output right
+bindsym $mod+Control+h move container to output left
+
+# setup monitors
+exec xrandr --output eDP-1 --primary --mode 1600x900 --pos 0x0 --rotate normal \
+       --output DP-1 --off --output HDMI-1 --off --output DP-2 --off \
+       --output HDMI-2 --off --output DP-2-1 --off \
+       --output DP-2-2 --mode 1920x1080 --pos 1600x0 --rotate normal \
+       --output DP-2-3 --off
