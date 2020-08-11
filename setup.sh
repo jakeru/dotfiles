@@ -53,7 +53,7 @@ function append_if_not_present() {
     fi
 }
 
-function setup_emacs() {
+function setup_emacs_no_longer_used() {
     echo Setting up Emacs...
     makedir "$HOME/.emacs.d"
     download \
@@ -62,6 +62,19 @@ function setup_emacs() {
     symlink "$SCRIPT_DIR/emacs/init.el" "$HOME/.emacs.d/init.el"
     symlink "$SCRIPT_DIR/emacs/configuration.org" "$HOME/.emacs.d/configuration.org"
     symlink "$SCRIPT_DIR/downloads/emacs/sensible-defaults.el" "$HOME/.emacs.d/sensible-defaults.el"
+}
+
+function setup_doom_emacs() {
+    echo Setting up Doom Emacs...
+    makedir "$HOME/.doom.d"
+    symlink "$SCRIPT_DIR/doom-emacs/config.el" "$HOME/.doom.d/config.el"
+    symlink "$SCRIPT_DIR/doom-emacs/init.el" "$HOME/.doom.d/init.el"
+    symlink "$SCRIPT_DIR/doom-emacs/packages.el" "$HOME/.doom.d/packages.el"
+    if [[ ! -e "$HOME/.emacs.d/bin/doom" ]]; then
+        echo Warning: Doom Emacs is not installed
+        echo Install with:
+        echo git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+    fi
 }
 
 function setup_inputrc() {
@@ -110,7 +123,7 @@ function setup_i3() {
 SCRIPT="$(readlinkf $0)"
 SCRIPT_DIR="$(dirname $SCRIPT)"
 
-setup_emacs
+setup_doom_emacs
 setup_inputrc
 setup_git
 setup_vscode
