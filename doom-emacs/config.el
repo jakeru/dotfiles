@@ -76,7 +76,7 @@
 )
 
 (defun insert-current-date-time ()
-  "insert the current date and time into the current buffer."
+  "Insert the current date and time into the current buffer."
   (interactive)
   (let ((now (current-time)))
      (insert (format-time-string "%Y-%m-%d " now))
@@ -87,7 +87,7 @@
 )
 
 (defun insert-current-time ()
-  "insert the current time into the current buffer."
+  "Insert the current time into the current buffer."
        (interactive)
        (insert (format-time-string "%H:%M" (current-time)))
        )
