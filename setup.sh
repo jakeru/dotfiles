@@ -98,6 +98,10 @@ function setup_bash() {
     append_if_not_present "$HOME/.bashrc" 'for file in ~/.bashrc.d/*.sh; do source $file; done'
     makedir "$HOME/.bashrc.d"
     symlink "$SCRIPT_DIR/bash/misc.sh" "$HOME/.bashrc.d/misc.sh"
+    download \
+        "https://github.com/git/git/raw/master/contrib/completion/git-prompt.sh" \
+        "downloads/bash/git-prompt.sh"
+    symlink "$SCRIPT_DIR/downloads/bash/git-prompt.sh" "$HOME/.bashrc.d/git-prompt.sh"
 }
 
 function setup_phist() {
