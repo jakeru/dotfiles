@@ -114,7 +114,7 @@ function setup_phist() {
 
 function setup_x() {
     echo Setting up X...
-    symlink "$SCRIPT_DIR/x/dot.xsession" "$HOME/.xsession"
+    symlink "$SCRIPT_DIR/x/dot.xsessionrc" "$HOME/.xsessionrc"
 }
 
 function setup_i3() {
