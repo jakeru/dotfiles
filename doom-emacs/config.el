@@ -4,10 +4,10 @@
 ;; sync' after modifying this file!
 
 
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+;; These are used for a number of things, particularly for GPG configuration,
+;; some email clients, file templates and snippets.
+(setq user-full-name "Jakob Ruhe"
+      user-mail-address "jakob.ruhe@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -95,4 +95,5 @@
 (map! :i "\C-cd" 'insert-current-date-time)
 (map! :i "\C-ct" 'insert-current-time)
 
-(map! :i "\C-h" 'evil-delete-backward-char)
+(map! :i "\C-h" 'evil-backward-char)
+(map! :i "\C-j" 'evil-ret)
