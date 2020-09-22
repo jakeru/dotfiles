@@ -75,7 +75,7 @@
   )
 )
 
-(defun insert-current-date-time ()
+(defun jr-insert-current-date-time ()
   "Insert the current date and time into the current buffer."
   (interactive)
   (let ((now (current-time)))
@@ -86,14 +86,14 @@
   )
 )
 
-(defun insert-current-time ()
+(defun jr-insert-current-time ()
   "Insert the current time into the current buffer."
        (interactive)
        (insert (format-time-string "%H:%M" (current-time)))
        )
 
-(map! :i "\C-cd" 'insert-current-date-time)
-(map! :i "\C-ct" 'insert-current-time)
+(map! :i "\C-cd" 'jr-insert-current-date-time)
+(map! :i "\C-ct" 'jr-insert-current-time)
 
 (map! :i "\C-h" 'evil-backward-char)
 (map! :i "\C-j" 'evil-ret)
