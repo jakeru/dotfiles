@@ -4,9 +4,11 @@ editor = emacsclient --tty --create-frame
 
 [alias]
 st=status
+reb=rebase origin/master
 rebi=rebase -i origin/master
 rebc=rebase --continue
 ca=commit --amend
+co=checkout
 reflogd=reflog --date=iso
 tree = log --graph --decorate --pretty=oneline --abbrev-commit
 
