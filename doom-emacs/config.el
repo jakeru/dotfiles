@@ -97,3 +97,5 @@
 
 (map! :i "\C-h" 'evil-backward-char)
 (map! :i "\C-j" 'evil-ret)
+
+(setq! require-final-newline t)
