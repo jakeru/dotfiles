@@ -99,3 +99,16 @@
 (map! :i "\C-j" 'evil-ret)
 
 (setq! require-final-newline t)
+
+;; Inspired by https://www.emacswiki.org/emacs/FlySpell
+;; Swedish dictionary installed with:
+;; apt install aspell-sv
+(let ((langs '("english" "sv")))
+  (setq lang-ring (make-ring (length langs)))
+  (dolist (elem langs) (ring-insert lang-ring elem)))
+(defun jr-flyspell-switch-language()
+  (interactive)
+  (let ((lang (ring-ref lang-ring -1)))
+    (ring-insert lang-ring lang)
+    (ispell-change-dictionary lang)))
+(global-set-key [f6] 'jr-flyspell-switch-language)
