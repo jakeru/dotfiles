@@ -95,9 +95,8 @@
 (map! :i "\C-cd" 'jr-insert-current-date-time)
 (map! :i "\C-ct" 'jr-insert-current-time)
 
-(map! :i "\C-h" 'evil-backward-char)
+(map! :i "\C-h" 'evil-delete-backward-char)
 (map! :i "\C-j" 'evil-ret)
-
 (setq! require-final-newline t)
 
 ;; Inspired by https://www.emacswiki.org/emacs/FlySpell
