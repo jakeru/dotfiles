@@ -14,10 +14,11 @@ function symlink() {
     declare TARGET=$1
     declare LINK_NAME=$2
     if [ "$(readlinkf $LINK_NAME)" = "$TARGET" ]; then
-	    echo Symlink $LINK_NAME already points to $TARGET
+        echo Symlink $LINK_NAME already points to $TARGET
     else
-	    echo Creating symlink $LINK_NAME to $TARGET...
-	    ln -s "$TARGET" "$LINK_NAME"
+        echo Creating symlink $LINK_NAME to $TARGET...
+            mkdir -p $(dirname "$LINK_NAME")
+        ln -s "$TARGET" "$LINK_NAME"
     fi
 }
 
