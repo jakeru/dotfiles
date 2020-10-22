@@ -118,6 +118,11 @@ function setup_x() {
     symlink "$SCRIPT_DIR/x/dot.xsessionrc" "$HOME/.xsessionrc"
 }
 
+function setup_keyboard() {
+    echo Setting up keyboard...
+    symlink "$SCRIPT_DIR/keyboard/dot.Xmodmap" "$HOME/.xmodmap"
+}
+
 function setup_i3() {
     echo Setting up i3...
     symlink "$SCRIPT_DIR/i3/config" "$HOME/.config/i3/config"
@@ -135,5 +140,6 @@ setup_vscode
 setup_bash
 setup_phist
 setup_x
+setup_keyboard
 setup_i3
 echo Operation completed.
