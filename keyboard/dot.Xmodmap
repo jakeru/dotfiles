@@ -1,0 +1,38 @@
+! Assign paragraph key for testing
+keycode 49 = 1 2 3 4 5 6 7 8
+
+clear lock
+clear control
+
+keycode 37 = Mode_switch
+! TODO: add also space as Mode_switch
+
+add control = Caps_Lock
+
+keycode 43 = h H BackSpace Delete
+keycode 44 = j J Down Down
+keycode 45 = k K Up Up
+keycode 46 = l L Right Right
+
+keycode 56 = b B Left Left
+
+! Use Mode_switch+A for Home
+keycode 38 = a A Home Home
+
+! Use Mode_switch+E for End
+keycode 26 = e E End End
+
+! Use Mode_switch+D for Delete
+keycode 40 = d D Delete
+
+! This looks like it is not working:
+!keycode 54 = c C NoSymbol XF86Copy
+!keycode 55 = v V NoSymbol XF86Paste
+
+! Use key t also for ~ and $
+keycode 28 = t T asciitilde dollar
+
+! Assign menu key to Super_R
+keycode 135 = Super_R
+
+! TODO: use 0 and $ for home and end?
