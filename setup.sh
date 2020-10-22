@@ -120,7 +120,7 @@ function setup_x() {
 
 function setup_keyboard() {
     echo Setting up keyboard...
-    symlink "$SCRIPT_DIR/keyboard/dot.Xmodmap" "$HOME/.xmodmap"
+    symlink "$SCRIPT_DIR/keyboard/dot.Xmodmap" "$HOME/.Xmodmap"
 }
 
 function setup_i3() {
