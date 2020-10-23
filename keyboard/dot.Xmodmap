@@ -1,3 +1,8 @@
+! To apply this file after changes has been made to it
+! or if your Window Manager does not load it automatically,
+! just type:
+! xmodmap ~/.Xmodmap
+
 ! Assign paragraph key for testing
 keycode 49 = 1 2 3 4 5 6 7 8
 
