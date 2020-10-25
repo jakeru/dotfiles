@@ -28,6 +28,13 @@ apt install rtags
 # bash (in emacs)
 apt install shellcheck
 
+# org-realm (emacs)
+apt install graphviz
+apt install sqlite3
+
+# python (emacs and others)
+apt install pipenv
+
 # access python3 using python
 update-alternatives --install /usr/local/bin/python python /usr/bin/python3 40
 
