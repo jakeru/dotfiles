@@ -96,7 +96,14 @@
 
 (map! :i "\C-h" 'evil-delete-backward-char)
 (map! :i "\C-j" 'evil-ret)
-(setq! require-final-newline t)
+
+;; Require final newline
+(setq require-final-newline t)
+
+;; Make it possible to copy text to and from emacs.
+;; Note: This only works when running in X, not within
+;; a terminal.
+(setq select-enable-clipboard t)
 
 ;; Inspired by https://www.emacswiki.org/emacs/FlySpell
 ;; Swedish dictionary installed with:
