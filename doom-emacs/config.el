@@ -56,14 +56,14 @@
 ;; With inspiration from:
 ;; https://stackoverflow.com/questions/251908/how-can-i-insert-current-date-and-time-into-a-file-using-emacs
 
-(defun jr-day-of-week (dt)
-  "Returns the day of the week, 1 to 7. Monday is 1."
+(defun jr-day-of-week-as-number (dt)
+  "Return the day of the week of DT, 1 to 7. Monday is 1."
   (string-to-number (format-time-string "%u" dt))
 )
 
-(defun jr-day-of-week-se (dt)
-  "Returns the day of the week, in Swedish"
-  (pcase (jr-day-of-week dt)
+(defun jr-day-of-week-sv (day-of-week)
+  "Return the day as a string of DAY-OF-WEEK, in Swedish."
+  (pcase day-of-week
     (1 "måndag")
     (2 "tisdag")
     (3 "onsdag")
@@ -74,24 +74,61 @@
   )
 )
 
-(defun jr-insert-current-date-time ()
-  "Insert the current date and time into the current buffer."
-  (interactive)
-  (let ((now (current-time)))
-     (insert (format-time-string "%Y-%m-%d " now))
-     (insert (jr-day-of-week-se now))
-     (insert (format-time-string " %H:%M" now))
-     (insert "\n")
+(defun jr-day-of-week-en (day-of-week)
+  "Return the day as a string of DAY-OF-WEEK, in English."
+  (pcase day-of-week
+    (1 "Monday")
+    (2 "Tuesday")
+    (3 "Wednesday")
+    (4 "Thursday")
+    (5 "Friday")
+    (6 "Saturday")
+    (7 "Sunday")
   )
+)
+
+(defun jr-day-of-week (dt lang)
+  "Get the day of week of DT in language LANG."
+  (let ((day-of-week (jr-day-of-week-as-number dt)))
+    (if (equal lang "sv")
+      (jr-day-of-week-sv day-of-week)
+      (jr-day-of-week-en day-of-week)
+    )
+  )
+)
+
+(defun jr-current-date-in-lang (lang)
+  "Get the current date using language LANG.
+Note that only Swedish and English are supported.
+If LANG is 'sv', Swedish will be used, otherwise English."
+  (let ((now (current-time)))
+    (concat
+     (format-time-string "%Y-%m-%d " now)
+     (jr-day-of-week now lang)
+     "\n"
+    )
+  )
+)
+
+(defun jr-insert-current-date-in-lang (lang)
+  "Insert the current date using language LANG."
+  (interactive)
+  (insert (jr-current-date-in-lang lang))
+)
+
+(defun jr-insert-current-date ()
+  "Insert the current date into the current buffer."
+  (interactive)
+  (jr-insert-current-date-in-lang ispell-current-dictionary)
 )
 
 (defun jr-insert-current-time ()
   "Insert the current time into the current buffer."
        (interactive)
        (insert (format-time-string "%H:%M" (current-time)))
-       )
+)
 
-(map! :i "\C-cd" 'jr-insert-current-date-time)
+(map! :i "\C-cd" 'jr-insert-current-date)
 (map! :i "\C-ct" 'jr-insert-current-time)
 
 (map! :i "\C-h" 'evil-delete-backward-char)
@@ -108,12 +145,15 @@
 ;; Inspired by https://www.emacswiki.org/emacs/FlySpell
 ;; Swedish dictionary installed with:
 ;; apt install aspell-sv
+(defvar lang-ring)
 (let ((langs '("english" "sv")))
   (setq lang-ring (make-ring (length langs)))
   (dolist (elem langs) (ring-insert lang-ring elem)))
-(defun jr-flyspell-switch-language()
+(defun jr-switch-language()
+  "Switch the language of the dictionary used for spell checking."
   (interactive)
   (let ((lang (ring-ref lang-ring -1)))
     (ring-insert lang-ring lang)
     (ispell-change-dictionary lang)))
-(global-set-key [f6] 'jr-flyspell-switch-language)
+(global-set-key [f6] 'jr-switch-language)
+;;; End of config.el
