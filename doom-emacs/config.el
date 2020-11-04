@@ -166,4 +166,10 @@ If LANG is 'sv', Swedish will be used, otherwise English."
   (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "◉"  "✿" "✿"  "✿"  "✿" ))
 )
 
+(use-package! org
+  :config
+  (setq org-ellipsis " ▾")
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t))
+
 ;;; End of config.el
