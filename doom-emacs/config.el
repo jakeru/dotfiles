@@ -156,4 +156,14 @@ If LANG is 'sv', Swedish will be used, otherwise English."
     (ring-insert lang-ring lang)
     (ispell-change-dictionary lang)))
 (global-set-key [f6] 'jr-switch-language)
+
+(with-eval-after-load 'org
+  (auto-fill-mode t))
+
+(use-package! org-superstar
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "◉"  "✿" "✿"  "✿"  "✿" ))
+)
+
 ;;; End of config.el
