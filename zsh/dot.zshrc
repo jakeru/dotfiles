@@ -1,99 +1,175 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Inspired by
+# https://github.com/BrodieRobertson/dotfiles
+# and
+# Luke's config for the Zoomer Shell
+# https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/jakob/.oh-my-zsh"
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# I use zplug from
+# https://github.com/zplug/zplug
+# as a zsh package manager
+source ~/.zplug/init.zsh
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+# Enable colors
+autoload -U colors && colors
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# History in cache directory:
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.cache/zsh/history
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Auto complete with case insenstivity
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+zmodload zsh/complist
+compinit
+# Include hidden files.
+_comp_options+=(globdots)
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# Use viins as main keymap
+bindkey -v
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+# Enable searching through history
+bindkey '^R' history-incremental-pattern-search-backward
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# Edit line in vim buffer ctrl-v
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^v' edit-command-line
+# Enter vim buffer from normal mode
+autoload -U edit-command-line && zle -N edit-command-line && bindkey -M vicmd "^v" edit-command-line
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'left' vi-backward-char
+bindkey -M menuselect 'down' vi-down-line-or-history
+bindkey -M menuselect 'up' vi-up-line-or-history
+bindkey -M menuselect 'right' vi-forward-char
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# Fix backspace bug when switching modes
+bindkey "^?" backward-delete-char
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+# ci", ci', ci`, di", etc
+autoload -U select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+  for c in {a,i}{\',\",\`}; do
+    bindkey -M $m $c select-quoted
+  done
+done
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# ci{, ci(, ci<, di{, etc
+autoload -U select-bracketed
+zle -N select-bracketed
+for m in visual viopp; do
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    bindkey -M $m $c select-bracketed
+  done
+done
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+     [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# Use lf to switch directories and bind it to ctrl-o
+# from Luke's config for the Zoomer Shell
+# https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+bindkey -s '^o' 'lfcd\n'
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# My stuff
 
-source $ZSH/oh-my-zsh.sh
+# Do not exit when pressing ctrl+d.
+# Note that zsh will exit anyway if ctrl+d is pressed 10 times.
+setopt ignore_eof
 
-# User configuration
+# From Sharing history in zsh
+# https://nuclearsquid.com/writings/shared-history-in-zsh/
+# and https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/history.zsh
+setopt share_history
+setopt extended_history
+setopt hist_ignore_space
+setopt hist_verify
 
-# export MANPATH="/usr/local/man:$MANPATH"
+# Persistent history
+persistent_history() {
+  #echo First argument: "$1"
+}
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+autoload -U add-zsh-hook
+add-zsh-hook preexec persistent_history
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# A few plugins
+zplug "MichaelAquilina/zsh-you-should-use", at:1.7.3
+zplug "plugins/command-not-found", from:oh-my-zsh
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "agkozak/zsh-z"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# Agnoster prompt
+zplug "agnoster/agnoster-zsh-theme", as:theme
+DEFAULT_USER=${USER}
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# My keys
+# Note: run `bindkey` without paramters to see current key bindings.
+bindkey -v
+bindkey '^a' vi-beginning-of-line
+bindkey '^b' vi-backward-char
+bindkey '^d' vi-delete-char
+bindkey '^e' vi-end-of-line
+bindkey '^f' vi-forward-char
+bindkey '^h' vi-backward-delete-char
+bindkey '^k' vi-kill-eol
+bindkey '^p' history-beginning-search-backward
+bindkey '^n' history-beginning-search-backward
+bindkey '^w' backward-kill-word
+
+# My aliases
+alias ls='ls --color=auto'
+
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# zplug post process
+#
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
