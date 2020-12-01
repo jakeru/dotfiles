@@ -15,11 +15,6 @@ source ~/.zplug/init.zsh
 # Enable colors
 autoload -U colors && colors
 
-# History in cache directory:
-HISTSIZE=10000
-SAVEHIST=10000
-HISTFILE=~/.cache/zsh/history
-
 # Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select
@@ -112,6 +107,13 @@ bindkey -s '^o' 'lfcd\n'
 
 # My stuff
 
+# When for example using `cd -` to go back to the previous directory do not
+# print the directory. It will anyway be shown in the prompt.
+setopt cd_silent
+
+# Add a slash automatically when completing something that is a directory.
+setopt auto_param_slash
+
 # Do not exit when pressing ctrl+d.
 # Note that zsh will exit anyway if ctrl+d is pressed 10 times.
 setopt ignore_eof
@@ -120,9 +122,14 @@ setopt ignore_eof
 # https://nuclearsquid.com/writings/shared-history-in-zsh/
 # and https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/history.zsh
 setopt share_history
-setopt extended_history
 setopt hist_ignore_space
 setopt hist_verify
+setopt hist_ignore_dups
+
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.cache/zsh/history
+mkdir -p "$(dirname "$HISTFILE")"
 
 # Persistent history
 persistent_history() {
@@ -153,7 +160,7 @@ bindkey '^f' vi-forward-char
 bindkey '^h' vi-backward-delete-char
 bindkey '^k' vi-kill-eol
 bindkey '^p' history-beginning-search-backward
-bindkey '^n' history-beginning-search-backward
+bindkey '^n' history-beginning-search-forward
 bindkey '^w' backward-kill-word
 
 # My aliases
