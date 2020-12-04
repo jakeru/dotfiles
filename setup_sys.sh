@@ -18,6 +18,8 @@ apt install fd-find
 
 # python (in emacs)
 apt install isort
+apt install python2-pytest
+apt install python3-pytest
 
 # markdown (in emacs)
 apt install markdown
