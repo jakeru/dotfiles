@@ -14,7 +14,7 @@ apt install g++
 apt install clang libclang-dev
 
 # doom (in emacs)
-apt install fdclone
+apt install fd-find
 
 # python (in emacs)
 apt install isort
