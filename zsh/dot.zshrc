@@ -165,6 +165,10 @@ bindkey '^w' backward-kill-word
 
 # My aliases
 alias ls='ls --color=auto'
+# Search for a command in the persistent history file.
+alias phgrep='cat ~/.persistent_history|grep'
+# See the latest executed commands stored in the persistent history file.
+alias phist='tail -n 50 ~/.persistent_history'
 
 #
 # zplug post process

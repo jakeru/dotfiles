@@ -76,6 +76,7 @@ function setup_doom_emacs() {
         echo Install with:
         echo git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
     fi
+    pip3 install cmake-language-server
 }
 
 function setup_inputrc() {

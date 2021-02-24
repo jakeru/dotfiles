@@ -172,4 +172,8 @@ If LANG is 'sv', Swedish will be used, otherwise English."
   (setq org-log-done 'time)
   (setq org-log-into-drawer t))
 
+(add-to-list 'auto-mode-alist '("\\Makefile.[a-zA-Z0-9_\-]+\\'" . makefile-gmake-mode))
+(add-to-list 'auto-mode-alist '("\\[a-zA-Z0-9_]+.zsh\\'" . shell-mode))
+
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
 ;;; End of config.el
