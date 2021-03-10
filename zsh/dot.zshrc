@@ -184,3 +184,18 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load
+
+# Add a newline at the end of the Agnoster prompt
+prompt_end() {
+  if [[ -n $CURRENT_BG ]]; then
+      print -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+  else
+      print -n "%{%k%}"
+  fi
+
+  print -n "%{%f%}"
+  CURRENT_BG=''
+
+  # Adds the new line
+  printf "\n#";
+}
