@@ -157,6 +157,14 @@ If LANG is 'sv', Swedish will be used, otherwise English."
     (ispell-change-dictionary lang)))
 (global-set-key [f6] 'jr-switch-language)
 
+;; Note that on Ubuntu 20.04 and Emacs 27 I got the following
+;; error:
+;; Symbol's value as variable is void: ispell-menu-map-needed
+;; I fixed this by updating the package dictionaries-common to
+;; version 28.3 like so:
+;; wget https://launchpad.net/ubuntu/+archive/primary/+files/dictionaries-common_1.28.3_all.deb
+;; sudo apt install ./dictionaries-common_1.28.3_all.deb
+
 (with-eval-after-load 'org
   (auto-fill-mode t))
 
