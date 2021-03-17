@@ -129,6 +129,11 @@ function setup_i3() {
     symlink "$SCRIPT_DIR/i3/config" "$HOME/.config/i3/config"
 }
 
+function setup_docker() {
+    echo Setting up Docker...
+    symlink "$SCRIPT_DIR/docker/config.json" "$HOME/.docker/config.json"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -143,4 +148,5 @@ setup_phist
 setup_x
 setup_keyboard
 setup_i3
+setup_docker
 echo Operation completed.
