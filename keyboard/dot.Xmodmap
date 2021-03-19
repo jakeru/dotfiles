@@ -3,9 +3,6 @@
 ! just type:
 ! xmodmap ~/.Xmodmap
 
-! Assign paragraph key for testing
-keycode 49 = 1 2 3 4 5 6 7 8
-
 ! Remove keys from lock and control
 clear lock
 clear control
@@ -38,18 +35,22 @@ keycode 26 = e E End End
 ! Use Mode_switch+D for Delete
 keycode 40 = d D Delete
 
-! Assign Mode_switch+Space for enter
+! Use Mode_switch+Space for Return
 keycode 65 = space space Return Return
+
+! Use Mode_switch+M to Return
+keycode 58 = m M Return Return
 
 ! Use Mode_switch+T for ~ and $
 keycode 28 = t T asciitilde dollar
 
-! Bind Mode_switch+U to Page Up
+! Use Mode_switch+U for Page Up
 keycode 30 = u U Prior Prior
-! Bind Mode_switch+N to Page Down
+
+! Use Mode_switch+N for Page Down
 keycode 57 = n N Next Next
 
-! Assign menu key to Super_R
+! Use Menu key for Super_R
 keycode 135 = Super_R
 
 ! This looks like it is not working:
