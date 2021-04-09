@@ -4,44 +4,50 @@ SCRIPT=$(realpath ${0})
 SCRIPT_DIR=$(dirname ${SCRIPT})
 
 # emacs
-apt install aspell-sv
-apt install ripgrep
-apt install editorconfig
+apt install --assume-yes aspell-sv
+apt install --assume-yes ripgrep
+apt install --assume-yes editorconfig
 
 # irony-server (in emacs)
-apt install cmake
-apt install g++
-apt install clang libclang-dev
+apt install --assume-yes cmake
+apt install --assume-yes g++
+apt install --assume-yes clang libclang-dev
 
 # doom (in emacs)
-apt install fd-find
+apt install --assume-yes fd-find
 
 # python (in emacs)
-apt install isort
-apt install python2-pytest
-apt install python3-pytest
+apt install --assume-yes isort
+apt install --assume-yes python2-pytest
+apt install --assume-yes python3-pytest
 
 # markdown (in emacs)
-apt install markdown
+apt install --assume-yes markdown
 
 # cc (in emacs)
-apt install rtags
+apt install --assume-yes rtags
 
 # bash (in emacs)
-apt install shellcheck
+apt install --assume-yes shellcheck
 
 # org-realm (emacs)
-apt install graphviz
-apt install sqlite3
+apt install --assume-yes graphviz
+apt install --assume-yes sqlite3
 
 # python (emacs and others)
-apt install pipenv
+apt install --assume-yes pipenv
 
 # access python3 using python
 update-alternatives --install /usr/local/bin/python python /usr/bin/python3 40
 
 # x
-apt install xcape
+apt install --assume-yes xcape
+
+# zsh
+apt install --assume-yes zsh
+
+# misc
+apt install --asume-yes curl python3-venv
 
 # touchpad
 ln --symbolic --force "$(realpath "${SCRIPT_DIR}/x/90-touchpad.conf")" \
