@@ -134,6 +134,11 @@ function setup_docker() {
     symlink "$SCRIPT_DIR/docker/config.json" "$HOME/.docker/config.json"
 }
 
+function setup_zsh() {
+    echo Setting up zsh...
+    symlink "$SCRIPT_DIR/zsh/dot.zshrc" "$HOME/.zshrc"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -149,4 +154,5 @@ setup_x
 setup_keyboard
 setup_i3
 setup_docker
+setup_zsh
 echo Operation completed.
