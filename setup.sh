@@ -127,6 +127,7 @@ function setup_keyboard() {
 function setup_i3() {
     echo Setting up i3...
     symlink "$SCRIPT_DIR/i3/config" "$HOME/.config/i3/config"
+    symlink "$SCRIPT_DIR/i3/i3status" "$HOME/.config/i3status/config"
 }
 
 function setup_docker() {
