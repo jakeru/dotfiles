@@ -109,7 +109,6 @@ If LANG is 'sv', Swedish will be used, otherwise English."
     (concat
      (format-time-string "%Y-%m-%d " now)
      (jr-day-of-week now lang)
-     "\n"
     )
   )
 )
@@ -117,7 +116,7 @@ If LANG is 'sv', Swedish will be used, otherwise English."
 (defun jr-insert-current-date-in-lang (lang)
   "Insert the current date using language LANG."
   (interactive)
-  (insert (jr-current-date-in-lang lang))
+  (insert "* [" (jr-current-date-in-lang lang) "]\n")
 )
 
 (defun jr-insert-current-date ()
@@ -129,7 +128,7 @@ If LANG is 'sv', Swedish will be used, otherwise English."
 (defun jr-insert-current-time ()
   "Insert the current time into the current buffer."
        (interactive)
-       (insert (format-time-string "%H:%M" (current-time)))
+       (insert "** " (format-time-string "%H:%M" (current-time)) "\n")
 )
 
 (map! :i "\C-cd" 'jr-insert-current-date)
