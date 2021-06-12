@@ -223,4 +223,8 @@ If LANG is 'sv', Swedish will be used, otherwise English."
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
   )
+
+(setq org-latex-pdf-process
+  '("xelatex -interaction nonstopmode %f"
+    "xelatex -interaction nonstopmode %f"))
 ;;; End of config.el
