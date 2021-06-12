@@ -196,6 +196,9 @@ bindsym $mod+Control+h move workspace to output left
 # Take a screenshot
 bindsym Print exec gnome-screenshot -i
 
+# Use a randomized background
+exec /usr/bin/feh --bg-fill --randomize ~/Dropbox/Media/Bakgrunder/* --bg-fill --randomize ~/Dropbox/Media/Bakgrunder/*
+
 # Setup monitors
 exec xrandr --output eDP-1 --primary --mode 1600x900 --pos 0x0 --rotate normal
 # Monitor at Tritech using docking station

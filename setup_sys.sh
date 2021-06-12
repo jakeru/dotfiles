@@ -49,6 +49,9 @@ apt install --assume-yes zsh
 # misc
 apt install --asume-yes curl python3-venv
 
+# feh
+apt install --assume-yes feh
+
 # touchpad
 ln --symbolic --force "$(realpath "${SCRIPT_DIR}/x/90-touchpad.conf")" \
     /usr/share/X11/xorg.conf.d/.
