@@ -144,6 +144,7 @@ zplug "MichaelAquilina/zsh-you-should-use", at:1.7.3
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "agkozak/zsh-z"
+zplug "zsh-users/zsh-autosuggestions", at:0.7.0
 
 # Agnoster prompt
 zplug "agnoster/agnoster-zsh-theme", as:theme
