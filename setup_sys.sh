@@ -26,6 +26,7 @@ apt install --assume-yes markdown
 
 # cc (in emacs)
 apt install --assume-yes rtags
+apt install --assume-yes clangd
 
 # bash (in emacs)
 apt install --assume-yes shellcheck
