@@ -14,10 +14,10 @@ function symlink() {
     declare TARGET=$1
     declare LINK_NAME=$2
     if [ "$(readlinkf $LINK_NAME)" = "$TARGET" ]; then
-        echo Symlink $LINK_NAME already points to $TARGET
+        echo "Symlink $LINK_NAME already points to $TARGET"
     else
-        echo Creating symlink $LINK_NAME to $TARGET...
-            mkdir -p $(dirname "$LINK_NAME")
+        echo "Creating symlink $LINK_NAME to $TARGET..."
+        mkdir -p "$(dirname "$LINK_NAME")"
         ln -s "$TARGET" "$LINK_NAME"
     fi
 }
@@ -27,7 +27,7 @@ function download() {
     declare SOURCE=$1
     declare TARGET=$2
     if [[ ! -f "$TARGET" ]]; then
-        echo Downloading $SOURCE to $TARGET...
+        echo "Downloading $SOURCE to $TARGET..."
         mkdir -p "$(dirname "$TARGET")"
         wget "$SOURCE" --output-document "$TARGET"
     fi
@@ -37,7 +37,7 @@ function download() {
 function makedir() {
     declare DIR=$1
     if [[ ! -d "$DIR" ]]; then
-        echo Creating directory $DIR...
+        echo "Creating directory $DIR..."
         mkdir -p "$DIR"
     fi
 }
@@ -47,9 +47,9 @@ function append_if_not_present() {
     declare FILE=$1
     declare LINE=$2
     if grep -xsqF -- "$LINE" "$FILE"; then
-        echo Line \'$LINE\' is already present in $FILE
+        echo "Line \'$LINE\' is already present in $FILE"
     else
-        echo Appending line \'$LINE\' to file $FILE
+        echo "Appending line \'$LINE\' to file $FILE"
         echo "$LINE" >> "$FILE"
     fi
 }
@@ -140,6 +140,11 @@ function setup_zsh() {
     symlink "$SCRIPT_DIR/zsh/dot.zshrc" "$HOME/.zshrc"
 }
 
+function setup_autorandr() {
+    echo Setting up autorandr...
+    symlink "$SCRIPT_DIR/autorandr" "$HOME/.config/autorandr"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -156,4 +161,5 @@ setup_keyboard
 setup_i3
 setup_docker
 setup_zsh
+setup_autorandr
 echo Operation completed.
