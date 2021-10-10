@@ -71,6 +71,7 @@ function setup_doom_emacs() {
     symlink "$SCRIPT_DIR/doom-emacs/config.el" "$HOME/.doom.d/config.el"
     symlink "$SCRIPT_DIR/doom-emacs/init.el" "$HOME/.doom.d/init.el"
     symlink "$SCRIPT_DIR/doom-emacs/packages.el" "$HOME/.doom.d/packages.el"
+    symlink "$SCRIPT_DIR/doom-emacs/ispell-personal.dictionary" "$HOME/.doom.d/ispell-personal-dictionary"
     if [[ ! -e "$HOME/.emacs.d/bin/doom" ]]; then
         echo Warning: Doom Emacs is not installed
         echo Install with:

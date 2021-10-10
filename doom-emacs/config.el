@@ -168,6 +168,8 @@ If LANG is 'sv', Swedish will be used, otherwise English."
 ;; wget https://launchpad.net/ubuntu/+archive/primary/+files/dictionaries-common_1.28.3_all.deb
 ;; sudo apt install ./dictionaries-common_1.28.3_all.deb
 
+(setq ispell-personal-dictionary "~/.doom.d/ispell-personal-dictionary")
+
 (with-eval-after-load 'org
   (auto-fill-mode t))
 
