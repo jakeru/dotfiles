@@ -192,6 +192,9 @@ If LANG is 'sv', Swedish will be used, otherwise English."
 
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
+(setq! evil-move-cursor-back nil)
+(setq! evil-move-beyond-eol t)
+
 (with-eval-after-load "ox-latex"
   (add-to-list 'org-latex-classes
                '("koma-article" "\\documentclass{scrartcl}"
