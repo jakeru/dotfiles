@@ -146,6 +146,11 @@ function setup_autorandr() {
     symlink "$SCRIPT_DIR/autorandr" "$HOME/.config/autorandr"
 }
 
+function setup_alacritty() {
+    echo Setting up alacritty...
+    symlink "$SCRIPT_DIR/alacritty/alacritty.yml" "$HOME/config/alacritty/alacritty.yml"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -163,4 +168,5 @@ setup_i3
 setup_docker
 setup_zsh
 setup_autorandr
+setup_alacritty
 echo Operation completed.
