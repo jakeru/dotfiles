@@ -4,13 +4,16 @@ editor = emacsclient --tty --alternate-editor=
 
 [alias]
 st=status
-reb=rebase origin/master
-rebi=rebase -i origin/master
+reb=rebase origin/main
+rebd=rebase origin/develop
+rebi=rebase -i origin/main
 rebc=rebase --continue
 ca=commit --amend
 co=checkout
 reflogd=reflog --date=iso
 tree = log --graph --decorate --pretty=oneline --abbrev-commit
+ctree = log --color --pretty=format:'%C(bold green)%h%Creset %ad: %s%d %C(green)[%C(bold blue)%an%Creset%C(green)]%Creset' --graph --date=short
+sw=stash --keep-index
 
 [user]
 name = Jakob Ruhe

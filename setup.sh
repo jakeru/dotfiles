@@ -71,7 +71,7 @@ function setup_doom_emacs() {
     symlink "$SCRIPT_DIR/doom-emacs/config.el" "$HOME/.doom.d/config.el"
     symlink "$SCRIPT_DIR/doom-emacs/init.el" "$HOME/.doom.d/init.el"
     symlink "$SCRIPT_DIR/doom-emacs/packages.el" "$HOME/.doom.d/packages.el"
-    symlink "$SCRIPT_DIR/doom-emacs/ispell-personal.dictionary" "$HOME/.doom.d/ispell-personal-dictionary"
+    symlink "$SCRIPT_DIR/doom-emacs/ispell-personal-dictionary" "$HOME/.doom.d/ispell-personal-dictionary"
     if [[ ! -e "$HOME/.emacs.d/bin/doom" ]]; then
         echo Warning: Doom Emacs is not installed
         echo Install with:
@@ -146,9 +146,36 @@ function setup_autorandr() {
     symlink "$SCRIPT_DIR/autorandr" "$HOME/.config/autorandr"
 }
 
+function setup_ssh() {
+    echo Setting up ssh...
+    symlink "$SCRIPT_DIR/ssh/config" "$HOME/.ssh/config"
+    symlink "$SCRIPT_DIR/ssh/wittra.cfg" "$HOME/.ssh/wittra.cfg"
+    symlink "$SCRIPT_DIR/ssh/private.cfg" "$HOME/.ssh/private.cfg"
+}
+
 function setup_alacritty() {
     echo Setting up alacritty...
-    symlink "$SCRIPT_DIR/alacritty/alacritty.yml" "$HOME/config/alacritty/alacritty.yml"
+    symlink "$SCRIPT_DIR/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
+}
+
+function setup_dot_profile() {
+    echo Setting up .profile...
+    symlink "$SCRIPT_DIR/dot.profile" "$HOME/.profile"
+}
+
+function setup_gdb() {
+    echo Setting up gdb...
+    symlink "$SCRIPT_DIR/gdb/gdbinit" "$HOME/.gdbinit"
+}
+
+function setup_zathura() {
+    echo Setting up zathura...
+    symlink "$SCRIPT_DIR/zathura/zathurarc" "$HOME/.config/zathura/zathurarc"
+}
+
+function setup_curl() {
+    echo Setting up curl...
+    symlink "$SCRIPT_DIR/curl/dot.curlrc" "$HOME/.curlrc"
 }
 
 # Main
@@ -168,5 +195,11 @@ setup_i3
 setup_docker
 setup_zsh
 setup_autorandr
+setup_ssh
 setup_alacritty
+setup_dot_profile
+setup_gdb
+setup_zathura
+setup_curl
+
 echo Operation completed.

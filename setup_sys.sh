@@ -56,3 +56,6 @@ apt install --assume-yes feh
 # touchpad
 ln --symbolic --force "$(realpath "${SCRIPT_DIR}/x/90-touchpad.conf")" \
     /usr/share/X11/xorg.conf.d/.
+
+# flameshot
+sudo apt install --assume-yes flameshot

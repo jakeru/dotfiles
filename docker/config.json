@@ -1,3 +1,11 @@
 {
-    "detachKeys": "ctrl-x,x"
+	"auths": {
+		"gitlab.tritech.se:4567": {
+			"auth": "amFrb2JyOmx0TUJhc2FoMjM="
+		},
+		"https://index.docker.io/v1/": {
+			"auth": "amFrb2JydWhlOjl6RnNEd0NvcUo3ZjdaNXM="
+		}
+	},
+	"detachKeys": "ctrl-x,x"
 }

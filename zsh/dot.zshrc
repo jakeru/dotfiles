@@ -121,20 +121,43 @@ setopt ignore_eof
 # From Sharing history in zsh
 # https://nuclearsquid.com/writings/shared-history-in-zsh/
 # and https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/history.zsh
-setopt share_history
+#setopt share_history
 setopt hist_ignore_space
 setopt hist_verify
 setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_fcntl_lock
+setopt inc_append_history
 
 HISTSIZE=10000
-SAVEHIST=10000
+SAVEHIST=1000000
 HISTFILE=~/.cache/zsh/history
 mkdir -p "$(dirname "$HISTFILE")"
 
+PHIST_DIR="$HOME/.persistent-history"
+
 # Persistent history
 persistent_history() {
-  #echo First argument: "$1"
+  local now="$(date +%s --utc)"
+  local year=$(date --date="@$now" +%Y --utc)
+  local date=$(date --date="@$now" +%F --utc)
+  local time=$(date --date="@$now" +%T --utc)
+  local host=${HOST:-unknown}
+  local user=${USER:-unknown}
+  local file="${PHIST_DIR}/$(date +%Y)/$(date +%F)_$$_${user}_${host}.txt"
+  local cmd=$(echo -n "$1" | tr '\n' ';')
+  mkdir -p "$(dirname "${file}")"
+  echo "${date} ${time} | ${cmd}" >> $file
 }
+
+lhist() {
+  fc -L 1
+}
+
+zle -N lhist
+
+alias phist="find ${PHIST_DIR} -type f | sort -r | xargs cat | less"
+alias phgrep="find ${PHIST_DIR} -type f | sort -r | xargs grep --no-filename"
 
 autoload -U add-zsh-hook
 add-zsh-hook preexec persistent_history
@@ -164,12 +187,43 @@ bindkey '^p' history-beginning-search-backward
 bindkey '^n' history-beginning-search-forward
 bindkey '^w' backward-kill-word
 
+# ctrl+left
+bindkey '^[[1;5D' backward-word
+
+# ctrl+right
+bindkey '^[[1;5C' forward-word
+
 # My aliases
 alias ls='ls --color=auto'
 # Search for a command in the persistent history file.
-alias phgrep='cat ~/.persistent_history|grep'
+#alias phgrep='cat ~/.persistent_history|grep'
 # See the latest executed commands stored in the persistent history file.
-alias phist='tail -n 50 ~/.persistent_history'
+#alias phist='tail -n 50 ~/.persistent_history'
+
+alias tt="tree --dirsfirst"
+alias ff="find . -type f"
+alias ll="ls -lah"
+
+alias c="batcat"
+
+# Many hosts are not happy with my alacritty terminal emulator, so pretend
+# that we are using something else.
+alias ssh="TERM=xterm-color ssh"
+
+# Platform IO
+path+=("$HOME/.platformio/penv/bin")
+
+# Nix
+path+=(/nix/store/nzp4m3cmm7wawk031byh8jg4cdzjq212-nix-2.3.16/bin)
+
+# gcloud - Google Cloud Services
+source $HOME/google-cloud-sdk/completion.zsh.inc
+source $HOME/google-cloud-sdk/path.zsh.inc
+
+# pyenv https://github.com/pyenv/pyenv
+PYENV_ROOT="$HOME/prog/apps/pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 #
 # zplug post process
@@ -200,3 +254,8 @@ prompt_end() {
   # Adds the new line
   printf "\n#";
 }
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

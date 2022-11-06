@@ -3,56 +3,166 @@
 ! just type:
 ! xmodmap ~/.Xmodmap
 
-! Remove keys from lock and control
-clear lock
+! Clear modifiers
+!clear lock
 clear control
+!clear mod1
+!clear mod4
+!clear mod5
+
+! remove Super_L from mod4
+!remove mod4 = Super_L
+!remove mod4 = Hyper_L
 
 ! Assign paragraph key for testing
 keycode 49 = 1 2 3 4 5 6 7 8
 
-! Use left control as mode switch modifier
+! A few random key codes
+! Alt_L = 64
+! Caps_Lock = 66
+! Shift_L = 50
+! Shift_R = 62
+! Alt_L = 64
+! Alt_R = 108
+! Control_L = 37
+! Control_R = 105
+! Super_L = 133
+! Menu = 135
+! space = 65
+! A = 38, S = 39, D = 40, F = 41, G = 42, H = 43, J = 44, K = 45, L = 46, Ö = 47
+
+! Use Control_L as Mode_switch
 keycode 37 = Mode_switch
 
 ! Use Caps Lock as control modifier
-add control = Caps_Lock
+!keycode 66 = Control_L
+!add control = Control_L
+!add control = Caps_Lock
+add control = Control_L Control_R
 
-! Reassign a few symbols with inspiration from vim when the mode switch modifier is active
-keycode 43 = h H BackSpace BackSpace
-keycode 44 = j J Down Down
-keycode 45 = k K Up Up
-keycode 46 = l L Right Right
-keycode 56 = b B Left Left
+! Use Alt_L as Mode_switch
+!keycode 64 = Mode_switch
+!add mod5 = Mode_switch
+!add mod5 = Alt_L Mode_switch
 
-! Use Mode_switch+F for Right
-keycode 41 = f F Right Right
+! Use Alt_L as ISO_Level3_Shift
+!keycode 64 = ISO_Level3_Shift Alt_L
+!add mod1 = Alt_L Alt_R
 
-! Use Mode_switch+A for Home
-keycode 38 = a A Home Home
+!add mod4 = Menu Super_L
 
-! Use Mode_switch+E for End
-keycode 26 = e E End End
+! Use Alt_R as Alt
+!keycode 108 = Alt_R
+!add mod1 = Alt_R
+! Use Ctrl_L as Alt
+!keycode 37 = Ctrl_L
+!keycode 37 = Alt_L
+!add mod1 = Alt_L
 
-! Use Mode_switch+D for Delete
-keycode 40 = d D Delete
+! Use Control_L as Meta
+!keycode 37 = Meta_L
+!add mod1 = Meta_L
 
-! Use Mode_switch+Space for Return
+!keycode 105 = Hyper_L
+!add mod2 = Hyper_R
+
+!keycode 133 = Super_L
+!add mod5 = Super_L
+
+! ! Reassign a few symbols with inspiration from vim when the mode switch modifier is active
+! keycode 43 = h H BackSpace BackSpace
+! keycode 44 = j J Down Down
+! keycode 45 = k K Up Up
+! keycode 46 = l L Right Right
+! keycode 57 = n N Left Left
+
+! ! Use Mode_switch+A for Home
+! keycode 38 = a A Home Home 1 exclam
+
+! ! Use Mode_switch+E for End
+! keycode 26 = e E End End
+
+! ! Use Mode_switch+D for Delete
+! keycode 40 = d D Delete
+
+! ! Use Mode_switch+Space for Return
 keycode 65 = space space Return Return
+! keycode 65 = ISO_Level3_Shift space ISO_Level3_Shift Return
 
-! Use Mode_switch+M to Return
-keycode 58 = m M Return Return
-
-! Use Mode_switch+T for ~ and $
-keycode 28 = t T asciitilde dollar
+! ! Use Mode_switch+T for ~ and $
+! keycode 28 = t T asciitilde dollar
 
 ! Use Mode_switch+U for Page Up
-keycode 30 = u U Prior Prior
+! keycode 30 = u U Prior Prior
 
-! Use Mode_switch+N for Page Down
-keycode 57 = n N Next Next
+! ! Use Mode_switch+M for Page Down
+! keycode 58 = m M Next Next
 
-! Use Menu key for Super_R
-keycode 135 = Super_R
+! ! Use Menu key for Super_R
+! keycode 135 = Super_R
 
-! This looks like it is not working:
-!keycode 54 = c C NoSymbol XF86Copy
-!keycode 55 = v V NoSymbol XF86Paste
+! keycode 24 = Q q Q q exclam 1
+
+! Number row
+keycode  10 = 1 exclam 1 exclam exclamdown onesuperior
+keycode  11 = 2 quotedbl 2 at at twosuperior
+keycode  12 = 3 numbersign 3 numbersign sterling threesuperior
+keycode  13 = 4 currency 4 dollar dollar onequarter
+keycode  14 = 5 percent 5 percent EuroSign cent
+keycode  15 = 6 ampersand 6 asciicircum yen fiveeighths
+keycode  16 = 7 slash 7 ampersand braceleft division
+keycode  17 = 8 parenleft 8 asterisk bracketleft guillemotleft
+keycode  18 = 9 parenright 9 parenleft bracketright guillemotright
+keycode  19 = 0 equal 0 parenright braceright degree
+keycode  20 = plus question minus underscore backslash questiondown
+! keycode  15 = 6 asciicircum 6 asciicircum
+! keycode  16 = 7 ampersand 7 ampersand
+! keycode  17 = 8 asterisk 8 asterisk
+! keycode  18 = 9 parenleft 9 parenleft
+! keycode  19 = 0 parenright 0 parenright
+! keycode  20 = minus underscore minus underscore
+! keycode  21 = equal plus equal plus
+
+! First row
+keycode  24 = q Q q Q exclam
+keycode  25 = w W w W quotedbl
+keycode  26 = e E End End numbersign
+keycode  27 = r R r R dollar
+keycode  28 = t T t T asciitilde
+keycode  29 = y Y y Y asciicircum
+keycode  30 = u U Prior Prior ampersand
+keycode  31 = i I i I rightarrow rightarrow asterisk
+keycode  32 = o O o O NoSymbol NoSymbol parenleft parenright
+keycode  33 = p P p P NoSymbol NoSymbol parenright parenright
+keycode  34 = aring Aring bracketleft bracketright braceleft braceright
+! keycode  34 = bracketleft braceleft bracketleft braceleft
+
+! Second row
+keycode  38 = a A Home Home 1
+keycode  39 = s S s S 2
+keycode  40 = d D Delete Delete 3
+keycode  41 = f F f F 4
+keycode  42 = g G g G 5
+keycode  43 = h H BackSpace BackSpace 6
+keycode  44 = j J Down Down 7
+keycode  45 = k K Up Up 8
+keycode  46 = l L Right Right 9
+keycode  47 = odiaeresis Odiaeresis semicolon colon 0
+keycode  48 = adiaeresis Adiaeresis apostrophe quotedbl ae AE
+! keycode  47 = semicolon colon semicolon colon
+! keycode  48 = apostrophe quotedbl apostrophe quotedbl
+
+! Third row
+keycode  52 = z Z z Z guillemotleft less
+keycode  53 = x X x X guillemotright greater
+keycode  54 = c C c C copyright copyright
+keycode  55 = v V v V leftdoublequotemark leftsinglequotemark
+keycode  56 = b B b B rightdoublequotemark rightsinglequotemark
+keycode  57 = n N Left Left
+keycode  58 = m M Next Next
+keycode  59 = comma semicolon comma less dead_cedilla dead_ogonek
+keycode  60 = period colon period greater periodcentered dead_abovedot
+keycode  61 = minus underscore slash question dead_belowdot dead_abovedot
+! keycode  59 = comma less comma less
+! keycode  60 = period greater period greater
+! keycode  61 = slash question slash question

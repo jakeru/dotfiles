@@ -1,0 +1,24 @@
+set history save on
+set history filename ~/.gdb_history
+set history size unlimited
+set history remove-duplicates 1000
+
+set pagination off
+
+python
+import os
+
+class Less(gdb.Command):
+    def __init__(self):
+        super().__init__("less", gdb.COMMAND_USER, gdb.COMPLETE_COMMAND)
+
+    def invoke(self, argstr, from_tty):
+
+        with os.popen("less","w") as pipe:
+            try:
+                pipe.write(gdb.execute(argstr, to_string=True))
+            except Exception as e:
+                pipe.write(str(e))
+
+Less()
+end
