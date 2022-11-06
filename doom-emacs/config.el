@@ -24,11 +24,18 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-acario-dark)
+;;(setq doom-theme 'doom-acario-dark)
+(setq doom-theme 'doom-dark+)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Notes/org")
+
+;; Name of file where new notes will be stored.
+(setq org-mobile-inbox-for-pull "~/Notes/org/flagged.org")
+
+;; Directory of the MobileOrg app.
+(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 
 ;; org-roam configuration
 (setq org-roam-directory "~/Notes/org/roam")
@@ -36,7 +43,7 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -131,11 +138,21 @@ If LANG is 'sv', Swedish will be used, otherwise English."
        (insert "** " (format-time-string "%H:%M" (current-time)) "\n")
 )
 
+;; (map! :i "\C-cd" 'jr-insert-current-date)
+;;
+(map! :i "\C-cD" 'org-time-stamp-inactive)
 (map! :i "\C-cd" 'jr-insert-current-date)
 (map! :i "\C-ct" 'jr-insert-current-time)
-
 (map! :i "\C-h" 'evil-delete-backward-char)
-(map! :i "\C-j" 'evil-ret)
+;; (map! :i "\C-j" 'evil-ret)
+;; (map! :i "\C-m" 'evil-ret)
+(map! "<XF86Paste>" 'evil-paste-after)
+(map! :nv "<XF86Copy>" 'evil-yank)
+
+(map! :nve "SPC e" 'execute-extended-command)
+(map! :nve "SPC j" 'evil-avy-goto-char-2)
+
+(map! :v "\C-c \C-c" 'comment-region)
 
 ;; Require final newline
 (setq require-final-newline t)
@@ -188,12 +205,122 @@ If LANG is 'sv', Swedish will be used, otherwise English."
 (add-to-list 'org-file-apps '("\\.pdf" . "zathura %s"))
 
 (add-to-list 'auto-mode-alist '("\\Makefile.[a-zA-Z0-9_\-]+\\'" . makefile-gmake-mode))
+(add-to-list 'auto-mode-alist '("\\.mak\\'" . makefile-gmake-mode))
+(add-to-list 'auto-mode-alist '("\\SConstruct\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("\\SConscript\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\[a-zA-Z0-9_]+.zsh\\'" . shell-mode))
+(add-to-list 'auto-mode-alist '("\\.module\\'" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.install\\'" . php-mode))
 
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
+;; Get rid of trailing whitespace
+;; (defun nuke_traling ()
+;;   "Nuke trailing whitespace."
+;;   (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
+;; (add-hook 'prog-mode-hook #'nuke_traling)
+
+;; Disable smart parens
+;;(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+
+;; Make it possible to complete immidiately by pressing alt+enter
+;; (define-key ivy-minibuffer-map (kbd "M-RET") 'ivy-immediate-done)
+
+;; Enable vertico
+(use-package vertico
+  :init
+  (vertico-mode)
+
+  ;; Different scroll margin
+  ;; (setq vertico-scroll-margin 0)
+
+  ;; Show more candidates
+  ;; (setq vertico-count 20)
+
+  ;; Grow and shrink the Vertico minibuffer
+  ;; (setq vertico-resize t)
+
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  ;; (setq vertico-cycle t)
+  ;;
+  (define-key vertico-map (kbd "M-RET") #'vertico-exit-input)
+  (define-key vertico-map (kbd "C-l") #'vertico-directory-enter)
+  (define-key vertico-map (kbd "C-h") #'vertico-directory-delete-word)
+  )
+
+(use-package orderless
+  :init
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (setq orderless-style-dispatchers '(+orderless-dispatch)
+  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+  (setq completion-styles '(orderless)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
+
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :init
+  (savehist-mode))
+
+;; Enable richer annotations using the Marginalia package
+;; (use-package marginalia
+;;   ;; Either bind `marginalia-cycle` globally or only in the minibuffer
+;;   :bind (("M-A" . marginalia-cycle)
+;;          :map minibuffer-local-map
+;;          ("M-A" . marginalia-cycle))
+;;
+;;   ;; The :init configuration is always executed (Not lazy!)
+;;   :init
+;;
+;;   ;; Must be in the :init section of use-package such that the mode gets
+;;   ;; enabled right away. Note that this forces loading the package.
+;;   (marginalia-mode))
+
+(use-package marginalia
+  :ensure t
+  :config
+  (marginalia-mode))
+
+(use-package embark
+  :ensure t
+
+  :bind
+  (("C-'" . embark-act)         ;; pick some comfortable binding
+   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+
+  :init
+
+  ;; Optionally replace the key help with a completing-read interface
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  :config
+
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :ensure t
+  :after (embark consult)
+  :demand t ; only necessary if you have the hook below
+  ;; if you want to have consult previews as you move around an
+  ;; auto-updating embark collect buffer
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
 (setq! evil-move-cursor-back nil)
 (setq! evil-move-beyond-eol t)
+
+;; Treat _ as part of a word
+;; From user Erik at https://emacs.stackexchange.com/a/20717/26676
+;; (with-eval-after-load 'evil
+    ;; (defalias #'forward-evil-word #'forward-evil-symbol)
+    ;; ;; make evil-search-word look for symbol rather than word boundaries
+    ;; (setq-default evil-symbol-word-search t))
 
 (with-eval-after-load "ox-latex"
   (add-to-list 'org-latex-classes
@@ -227,9 +354,20 @@ If LANG is 'sv', Swedish will be used, otherwise English."
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("wsf_annual_meeting"
+                 "\\documentclass{wsf_annual_meeting}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
   )
 
 (setq org-latex-pdf-process
   '("xelatex -interaction nonstopmode %f"
     "xelatex -interaction nonstopmode %f"))
+
+;; Atomic Chrome
+;; https://github.com/alpha22jp/atomic-chrome
+;; (atomic-chrome-start-server)
+
 ;;; End of config.el

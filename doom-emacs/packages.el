@@ -50,3 +50,13 @@
 ;(unpin! t)
 
 (package! org-superstar)
+(package! uncrustify-mode)
+(package! ox-jira :recipe (:branch "trunk"))
+(package! lsp-docker)
+(package! atomic-chrome)
+(package! protobuf-mode)
+;; (package! treemacs-evil)
+(package! ws-butler)
+(package! clang-format)
+
+;;; packages.el ends here
