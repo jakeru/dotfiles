@@ -39,11 +39,11 @@
 
 ;; org-roam configuration
 (setq org-roam-directory "~/Notes/org/roam")
-(add-hook 'after-init-hook 'org-roam-mode)
+;; (add-hook 'after-init-hook 'org-roam-mode)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type t)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -166,15 +166,25 @@ If LANG is 'sv', Swedish will be used, otherwise English."
 ;; Swedish dictionary installed with:
 ;; apt install aspell-sv
 (defvar lang-ring)
-(let ((langs '("english" "sv")))
+(let ((langs '("en" "sv")))
   (setq lang-ring (make-ring (length langs)))
   (dolist (elem langs) (ring-insert lang-ring elem)))
+
+(defun jr-set-language (lang)
+  "Set the language used for spell checking."
+  (interactive)
+    (ispell-change-dictionary lang)
+    ;; Without changing personal dictionary we get the error:
+    ;; Expected language "en" but got "sv".
+    (setq ispell-personal-dictionary
+          (concat "~/.doom.d/ispell-personal-dictionary-" lang)))
+
 (defun jr-switch-language()
   "Switch the language of the dictionary used for spell checking."
   (interactive)
   (let ((lang (ring-ref lang-ring -1)))
     (ring-insert lang-ring lang)
-    (ispell-change-dictionary lang)))
+    (jr-set-language lang)))
 (global-set-key [f6] 'jr-switch-language)
 
 ;; Note that on Ubuntu 20.04 and Emacs 27 I got the following
@@ -185,7 +195,7 @@ If LANG is 'sv', Swedish will be used, otherwise English."
 ;; wget https://launchpad.net/ubuntu/+archive/primary/+files/dictionaries-common_1.28.3_all.deb
 ;; sudo apt install ./dictionaries-common_1.28.3_all.deb
 
-(setq ispell-personal-dictionary "~/.doom.d/ispell-personal-dictionary")
+(jr-set-language "en")
 
 (with-eval-after-load 'org
   (auto-fill-mode t))
@@ -311,6 +321,13 @@ If LANG is 'sv', Swedish will be used, otherwise English."
   ;; auto-updating embark collect buffer
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package! kbd-mode)
+
+;; (use-package! corfu)
+
+(with-eval-after-load 'lsp-mode
+  (setq lsp-lens-enable nil))
 
 (setq! evil-move-cursor-back nil)
 (setq! evil-move-beyond-eol t)

@@ -58,5 +58,11 @@
 ;; (package! treemacs-evil)
 (package! ws-butler)
 (package! clang-format)
-
+(package! kbd-mode
+  :recipe (:host github
+           :repo "kmonad/kbd-mode"))
+(package! corfu)
+;; (package! python-black
+;;   :recipe (:host github
+;;            :repo "wbolster/emacs-python-black"))
 ;;; packages.el ends here
