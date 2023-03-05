@@ -179,6 +179,11 @@ function setup_curl() {
     symlink "$SCRIPT_DIR/curl/dot.curlrc" "$HOME/.curlrc"
 }
 
+function setup_nvim() {
+    echo Setting up nvim...
+    symlink "$SCRIPT_DIR/nvim" "$HOME/.config/nvim"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -202,5 +207,6 @@ setup_dot_profile
 setup_gdb
 setup_zathura
 setup_curl
+setup_nvim
 
 echo Operation completed.
