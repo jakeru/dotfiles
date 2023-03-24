@@ -184,6 +184,11 @@ function setup_nvim() {
     symlink "$SCRIPT_DIR/nvim" "$HOME/.config/nvim"
 }
 
+function setup_kitty() {
+    echo Setting up kitty...
+    symlink "$SCRIPT_DIR/kitty" "$HOME/.config/kitty"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -208,5 +213,6 @@ setup_gdb
 setup_zathura
 setup_curl
 setup_nvim
+setup_kitty
 
 echo Operation completed.
