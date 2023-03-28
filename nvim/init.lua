@@ -2,10 +2,16 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Require some things
+-- Setup basics 
 require('core.lazy')
 require('core.options')
 require('core.keymaps')
 
--- Set colorscheme
-vim.api.nvim_command("colorscheme tokyonight")
+-- Configure plugins
+require('conf.cmp')
+require('conf.colorscheme')
+require('conf.harpoon')
+require('conf.lsp')
+require('conf.neo-tree')
+require('conf.telescope')
+require('conf.treesitter')

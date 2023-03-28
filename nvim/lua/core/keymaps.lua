@@ -16,26 +16,33 @@ end
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Explore files
-keymap('n', '<Leader>ff', ':Explore<CR>')
-
--- Save files quickly
-keymap('n', '<Leader>fs', ':w<CR>')
+-- Save files
+keymap('n', '<Leader>fs', ':w<cr>')
 
 -- Navigate buffers
-keymap("n", "<C-l>", ":bnext<CR>")
-keymap("n", "<C-h>", ":bprevious<CR>")
-keymap('n', '<Leader>bd', ':bdelete<CR>')
+keymap("n", "<C-l>", ":bnext<cr>")
+keymap("n", "<C-h>", ":bprevious<cr>")
+keymap('n', '<Leader>bd', ':bdelete<cr>')
 
 -- Source file
-keymap('n', '<Leader>s', ':source<CR>')
+keymap('n', '<Leader>s', ':source<cr>')
 
 -- Move around
 keymap('n', '<S-h>', '0')
 
 -- Execute something
--- Note: Nothing is shown before the user types something.
 keymap('n', '<Leader>e', ':')
+
+-- Keep selection when indenting
+keymap('v', '<', '<gv')
+keymap('v', '>', '>gv')
+
+-- Explore files
+keymap('n', '<Leader>fe', ':Explore<cr>', 'Explore')
+
+-- Neotree 
+keymap('n', '<Leader>ff', ':Neotree toggle reveal<cr>', 'NeoTree')
+keymap('n', '<Leader>gg', ':Neotree float git_status<cr>', 'NeoTree git status')
 
 -- undotree
 keymap('n', '<Leader>u', vim.cmd.UndotreeToggle, "Undotree")

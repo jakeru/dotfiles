@@ -20,6 +20,9 @@ local builtin = require('telescope.builtin')
 -- :lua require('telescope.builtin').vim_options()
 -- :lua require('telescope.builtin').git_commits()
 -- :lua require('telescope.builtin').git_branches()
+--
+-- Or even easier:
+-- :Telescope git_bcommits
 
 vim.keymap.set('n', '<leader><leader>', builtin.find_files, {})
 vim.keymap.set('n', '<leader>*', builtin.grep_string, {})
