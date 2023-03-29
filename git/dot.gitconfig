@@ -1,17 +1,19 @@
 [core]
 excludesfile = "~/.gitexcludes"
-editor = emacsclient --tty --alternate-editor=
+editor = nvim
 
 [alias]
 st=status
 stuno=status --untracked-files=no
 reb=rebase origin/main
-rebd=rebase origin/develop
 rebi=rebase -i origin/main
+rebd=rebase origin/develop
+rebdi=rebase -i origin/develop
 rebc=rebase --continue
 ca=commit --amend
 co=checkout
 cp=cherry-pick
+bd=branch -a --sort=-committerdate
 reflogd=reflog --date=iso
 tree = log --graph --decorate --pretty=oneline --abbrev-commit
 ctree = log --color --pretty=format:'%C(bold green)%h%Creset %ad: %s%d %C(green)[%C(bold blue)%an%Creset%C(green)]%Creset' --graph --date=short
