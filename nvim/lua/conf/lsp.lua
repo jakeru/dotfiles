@@ -31,7 +31,7 @@ local on_attach = function(_, bufnr)
                     border = 'rounded',
                     source = 'always',
                     prefix = ' ',
-                    scope = 'cursor',
+                    scope = 'line',
                 }
                 vim.diagnostic.open_float(nil, opts)
             end

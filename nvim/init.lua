@@ -8,6 +8,7 @@ require('core.options')
 require('core.keymaps')
 
 -- Configure plugins
+require('conf.autopairs')
 require('conf.cmp')
 require('conf.colorscheme')
 require('conf.harpoon')

@@ -22,7 +22,13 @@ keymap('n', '<Leader>fs', ':w<cr>')
 -- Navigate buffers
 keymap("n", "<C-l>", ":bnext<cr>")
 keymap("n", "<C-h>", ":bprevious<cr>")
+keymap("n", "<leader>bl", ":bnext<cr>")
+keymap("n", "<leader>bh", ":bprevious<cr>")
 keymap('n', '<Leader>bd', ':bdelete<cr>')
+
+
+-- Navigate windows
+keymap('n', '<C-w>d', ':close<cr>', 'Close window')
 
 -- Source file
 keymap('n', '<Leader>s', ':source<cr>')

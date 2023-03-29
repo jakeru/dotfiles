@@ -1,39 +1,39 @@
 return {
     {
         'folke/neoconf.nvim',
-    	cmd = "Neoconf"
+        cmd = "Neoconf"
     },
     {
         'folke/neodev.nvim',
         config = true,
     },
     {
-	    'folke/which-key.nvim',
-	    config = function()
-		    vim.o.timeout = true
-		    vim.o.timeoutlen = 300
-		    require("which-key").setup({
+        'folke/which-key.nvim',
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup({
             })
         end,
     },
     {
         'ziontee113/color-picker.nvim',
-	    cmd = 'PickColor',
+        cmd = 'PickColor',
         config = true,
     },
     {
-	    'kylechui/nvim-surround',
-	    config = true,
+        'kylechui/nvim-surround',
+        config = true,
     },
+    -- An alternative file explorer
     {
-        -- An alternative file explorer
-	    "nvim-neo-tree/neo-tree.nvim",
-	    version = "v2.x",
-	    dependencies = {
-		    'nvim-lua/plenary.nvim',
-		    'nvim-tree/nvim-web-devicons',
-		    'MunifTanjim/nui.nvim',
-	    },
+        "nvim-neo-tree/neo-tree.nvim",
+        version = "v2.x",
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'nvim-tree/nvim-web-devicons',
+            'MunifTanjim/nui.nvim',
+        },
     },
     -- An alternative status bar
     {
@@ -64,21 +64,26 @@ return {
     {
         'tpope/vim-fugitive',
     },
+    -- Add indentation guides even on blank lines
     {
-        -- Add indentation guides even on blank lines
         'lukas-reineke/indent-blankline.nvim',
-        -- Enable `lukas-reineke/indent-blankline.nvim`
         -- See `:help indent_blankline.txt`
-        opts = {
-            char = '┊',
-            show_trailing_blankline_indent = false,
-        },
+        config = function()
+	require('indent_blankline').setup({
+	    char = '┊',
+	    show_trailing_blankline_indent = false
+	})
+        end
     },
     {
         -- "gc" to line comments
         -- "gb" for block comments
         'numToStr/Comment.nvim',
         opts = {}
+    },
+    -- Editing
+    {
+        'windwp/nvim-autopairs',
     },
     -- Syntax highlighting using tree-sitter
     {
@@ -119,10 +124,10 @@ return {
     -- git
     --
     -- Color schemes
-	{
-		'folke/tokyonight.nvim',
-		priority = 1000,
-	},
+    {
+        'folke/tokyonight.nvim',
+        priority = 1000,
+    },
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
@@ -139,6 +144,19 @@ return {
     {
         'nvim-telescope/telescope-media-files.nvim',
     },
+    -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+    -- Only load if `make` is available. Make sure you have the system
+    -- requirements installed.
+    {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        -- NOTE: If you are having trouble with this installation,
+        --       refer to the README for telescope-fzf-native for more instructions.
+        build = 'make',
+        cond = function()
+            return vim.fn.executable 'make' == 1
+        end,
+    },
+    -- LSP Zero
     --[[ {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',

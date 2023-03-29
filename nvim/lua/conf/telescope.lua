@@ -13,6 +13,10 @@ require('telescope').setup {
   }
 }
 
+local function nmap(k, v, desc)
+  vim.keymap.set('n', k, v, {desc=desc})
+end
+
 local builtin = require('telescope.builtin')
 
 -- Note:
@@ -24,19 +28,37 @@ local builtin = require('telescope.builtin')
 -- Or even easier:
 -- :Telescope git_bcommits
 
-vim.keymap.set('n', '<leader><leader>', builtin.find_files, {})
-vim.keymap.set('n', '<leader>*', builtin.grep_string, {})
-vim.keymap.set('n', '<leader>bb', builtin.buffers, {desc='list buffers'})
-vim.keymap.set('n', '<leader>ts', builtin.live_grep, {desc='live grep'})
-vim.keymap.set('n', '<leader>tt', builtin.help_tags, {desc='help_tags'})
-vim.keymap.set('n', '<leader>tc', builtin.commands, {desc='commands'})
-vim.keymap.set('n', '<leader>th', builtin.command_history, {desc='command_history'})
-vim.keymap.set('n', '<leader>tm', builtin.man_pages, {desc='man_pages'})
+nmap('<leader><leader>', builtin.find_files, 'Telescope find files')
+nmap('<leader>*', builtin.grep_string, 'Telescope grep')
+nmap('<leader>bb', builtin.buffers, 'list buffers')
+nmap('<leader>ts', builtin.live_grep, 'live grep')
+nmap('<leader>tt', builtin.help_tags, 'help_tags')
+nmap('<leader>tc', builtin.commands, 'commands')
+nmap('<leader>th', builtin.command_history, 'command_history')
 
-vim.keymap.set('n', '<leader>gf', builtin.git_files, {desc='search git files'})
-vim.keymap.set('n', '<leader>gb', builtin.git_branches, {desc='git branches'})
-vim.keymap.set('n', '<leader>gc', builtin.git_commits, {desc='git commits'})
+local function all_man_pages()
+    builtin.man_pages({sections={'ALL'}})
+end
+
+nmap('<leader>tm', all_man_pages, 'man_pages')
+
+nmap('<leader>gf', builtin.git_files, 'search git files')
+nmap('<leader>gb', builtin.git_branches, 'git branches')
+nmap('<leader>gc', builtin.git_commits, 'git commits')
 
 local project = require'telescope'.load_extension('project')
 
-vim.keymap.set('n', '<leader>pp', project.project, {})
+nmap('<leader>pp', project.project, 'Projects')
+
+-- Enable telescope fzf native, if installed
+pcall(require('telescope').load_extension, 'fzf')
+
+-- Fuzzy finding, from the kickstarter plugin.
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer' })
+
