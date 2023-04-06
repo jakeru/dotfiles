@@ -44,9 +44,6 @@ vim.opt.number = true
 -- set relative numbered lines
 vim.opt.relativenumber = false
 
--- The font used in graphical neovim applications
-vim.opt.guifont = "monospace:h11"
-
 -- Persistent undo information
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
@@ -62,3 +59,12 @@ vim.diagnostic.config({
   update_in_insert = false,
   severity_sort = false,
 })
+
+-- Signs (left or together with line numbers)
+-- :help signclumn
+-- 'auto': Show sign left of line number when needed
+-- 'number': Show sign instead of line number
+-- 'yes:n': always reserve `n` spaces for signs left of line numbers
+-- Tip found at:
+-- https://www.reddit.com/r/neovim/comments/neaeej/only_just_discovered_set_signcolumnnumber_i_like/
+vim.o.signcolumn = 'number'

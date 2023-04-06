@@ -16,7 +16,7 @@ vim.fn.sign_define("DiagnosticSignHint",
     { text = "", texthl = "DiagnosticSignHint" })
 
 require("neo-tree").setup({
-    close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+    close_if_last_window = true,
     popup_border_style = "rounded",
     enable_git_status = true,
     enable_diagnostics = true,
@@ -68,8 +68,8 @@ require("neo-tree").setup({
         git_status = {
             symbols = {
                 -- Change type
-                added     = "",      -- or "✚", but this is redundant info if you use git_status_colors on the name
-                modified  = "",      -- or "", but this is redundant info if you use git_status_colors on the name
+                added     = "✚",   -- or "✚", but this is redundant info if you use git_status_colors on the name
+                modified  = "",   -- or "", but this is redundant info if you use git_status_colors on the name
                 deleted   = "✖",   -- this can only be used in the git_status source
                 renamed   = "",   -- this can only be used in the git_status source
                 -- Status type
@@ -91,7 +91,8 @@ require("neo-tree").setup({
         mappings = {
             ["<space>"] = {
                 "toggle_node",
-                nowait = false,     -- disable `nowait` if you have existing combos starting with this char that you want to use
+                -- disable `nowait` if you have existing combos starting with this char that you want to use
+                nowait = false,
             },
             ["<2-LeftMouse>"] = "open",
             ["<cr>"] = "open",
@@ -165,7 +166,7 @@ require("neo-tree").setup({
                 --".null-ls_*",
             },
         },
-        follow_current_file = false,        -- This will find and focus the file in the active buffer every
+        follow_current_file = true,        -- This will find and focus the file in the active buffer every
         -- time the current file is changed while the tree is open.
         group_empty_dirs = false,           -- when true, empty folders will be grouped together
         hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree

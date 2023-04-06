@@ -35,6 +35,11 @@ return {
             'MunifTanjim/nui.nvim',
         },
     },
+    {
+        -- Quickly switch between number formats hex/dec/bin
+        'skosulor/nibbler',
+        config = true,
+    },
     -- An alternative status bar
     {
         'nvim-lualine/lualine.nvim',
@@ -52,8 +57,12 @@ return {
         },
     },
     {
-        'ThePrimeagen/harpoon',
-        dependencies = 'nvim-lua/plenary.nvim',
+        -- Example of usage:
+        -- :Bufferize messages
+        -- :Bufferize digraphs
+        -- :Bufferize map
+        -- :Bufferize command
+        'AndrewRadev/bufferize.vim'
     },
     {
         'wesleimp/stylua.nvim'
@@ -63,6 +72,16 @@ return {
     },
     {
         'tpope/vim-fugitive',
+    },
+    -- Navigation
+    -- Quickly jump around in the text
+    {
+        'phaazon/hop.nvim',
+    },
+    -- Quickly jump between buffers
+    {
+        'ThePrimeagen/harpoon',
+        dependencies = 'nvim-lua/plenary.nvim',
     },
     -- Add indentation guides even on blank lines
     {
@@ -85,6 +104,11 @@ return {
     {
         'windwp/nvim-autopairs',
     },
+    {
+        -- Trim trailing spaces
+        'lewis6991/spaceless.nvim',
+        config = true
+    },
     -- Syntax highlighting using tree-sitter
     {
         'nvim-treesitter/nvim-treesitter',
@@ -94,6 +118,9 @@ return {
         config = function()
             require('nvim-treesitter.configs').setup({})
         end
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
     },
     -- LSP
     {
@@ -136,10 +163,7 @@ return {
         },
     },
     {
-        'nvim-telescope/telescope-project.nvim',
-        dependencies = {
-            'nvim-telescope/telescope-file-browser.nvim'
-        },
+        'nvim-telescope/telescope-file-browser.nvim'
     },
     {
         'nvim-telescope/telescope-media-files.nvim',
@@ -155,6 +179,10 @@ return {
         cond = function()
             return vim.fn.executable 'make' == 1
         end,
+    },
+    -- Project
+    {
+        "ahmedkhalf/project.nvim",
     },
     -- LSP Zero
     --[[ {

@@ -1,20 +1,29 @@
 require('telescope').setup {
-  extensions = {
-    project = {
-      base_dirs = {
-        '~/prog',
-        '~/Notes',
-      },
-      hidden_files = true,
-      theme = "dropdown",
-      order_by = "asc",
-      search_by = "recent",
+    extensions = {
+    --     project = {
+    --         base_dirs = {
+    --             '~/prog',
+    --             '~/Notes',
+    --         },
+    --         hidden_files = true,
+    --         theme = "dropdown",
+    --         order_by = "asc",
+    --         search_by = "recent",
+    --     },
+        fzf = {
+            fuzzy = true,
+        }
     }
-  }
 }
 
+-- Enable telescope fzf native
+-- Note that this should be done after the call to setup
+-- according to:
+-- https://github.com/nvim-telescope/telescope-fzf-native.nvim
+require('telescope').load_extension('fzf')
+
 local function nmap(k, v, desc)
-  vim.keymap.set('n', k, v, {desc=desc})
+    vim.keymap.set('n', k, v, { desc = desc })
 end
 
 local builtin = require('telescope.builtin')
@@ -37,7 +46,7 @@ nmap('<leader>tc', builtin.commands, 'commands')
 nmap('<leader>th', builtin.command_history, 'command_history')
 
 local function all_man_pages()
-    builtin.man_pages({sections={'ALL'}})
+    builtin.man_pages({ sections = { 'ALL' } })
 end
 
 nmap('<leader>tm', all_man_pages, 'man_pages')
@@ -46,19 +55,15 @@ nmap('<leader>gf', builtin.git_files, 'search git files')
 nmap('<leader>gb', builtin.git_branches, 'git branches')
 nmap('<leader>gc', builtin.git_commits, 'git commits')
 
-local project = require'telescope'.load_extension('project')
+-- local project = require 'telescope'.load_extension('project')
 
-nmap('<leader>pp', project.project, 'Projects')
-
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
+-- nmap('<leader>pp', project.project, 'Projects')
 
 -- Fuzzy finding, from the kickstarter plugin.
 vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
+    -- You can pass additional configuration to telescope to change theme, layout, etc.
+    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        winblend = 10,
+        previewer = true,
+    })
 end, { desc = '[/] Fuzzily search in current buffer' })
-
