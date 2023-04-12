@@ -25,8 +25,8 @@ return {
         'kylechui/nvim-surround',
         config = true,
     },
-    -- An alternative file explorer
     {
+        -- An alternative file explorer
         "nvim-neo-tree/neo-tree.nvim",
         version = "v2.x",
         dependencies = {
@@ -35,8 +35,8 @@ return {
             'MunifTanjim/nui.nvim',
         },
     },
+    -- Quickly switch between number formats hex/dec/bin
     {
-        -- Quickly switch between number formats hex/dec/bin
         'skosulor/nibbler',
         config = true,
     },
@@ -88,12 +88,13 @@ return {
         'lukas-reineke/indent-blankline.nvim',
         -- See `:help indent_blankline.txt`
         config = function()
-	require('indent_blankline').setup({
-	    char = '┊',
-	    show_trailing_blankline_indent = false
-	})
+            require('indent_blankline').setup({
+                char = '┊',
+                show_trailing_blankline_indent = false
+            })
         end
     },
+    -- Add and remove comments
     {
         -- "gc" to line comments
         -- "gb" for block comments
