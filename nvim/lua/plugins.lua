@@ -105,6 +105,10 @@ return {
     {
         'windwp/nvim-autopairs',
     },
+    -- A yank key ring like in Emacs
+    {
+        'gbprod/yanky.nvim',
+    },
     {
         -- Trim trailing spaces
         'lewis6991/spaceless.nvim',
