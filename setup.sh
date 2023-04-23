@@ -189,6 +189,11 @@ function setup_kitty() {
     symlink "$SCRIPT_DIR/kitty" "$HOME/.config/kitty"
 }
 
+function setup_tmux() {
+    echo Setting up tmux...
+    symlink "$SCRIPT_DIR/tmux/dot.tmux.conf" "$HOME/.tmux.conf"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -214,5 +219,6 @@ setup_zathura
 setup_curl
 setup_nvim
 setup_kitty
+setup_tmux
 
 echo Operation completed.
