@@ -1,17 +1,75 @@
-require('telescope').setup {
+local telescope = require('telescope')
+
+local actions = require "telescope.actions"
+
+local fb_actions = telescope.extensions.file_browser.actions
+
+telescope.setup {
+    defaults = {
+        prompt_prefix = " ",
+        selection_caret = " ",
+        path_display = { "smart" },
+        mappings = {
+            i = {
+                ["<C-n>"] = actions.cycle_history_next,
+                ["<C-p>"] = actions.cycle_history_prev,
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<C-c>"] = actions.close,
+                ["<Down>"] = actions.move_selection_next,
+                ["<Up>"] = actions.move_selection_previous,
+                ["<CR>"] = actions.select_default,
+                ["<C-x>"] = actions.select_horizontal,
+                ["<C-v>"] = actions.select_vertical,
+                ["<C-t>"] = actions.select_tab,
+                ["<C-u>"] = actions.preview_scrolling_up,
+                ["<C-d>"] = actions.preview_scrolling_down,
+                ["<PageUp>"] = actions.results_scrolling_up,
+                ["<PageDown>"] = actions.results_scrolling_down,
+                ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                ["<C-l>"] = actions.complete_tag,
+                ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+            },
+            n = {
+                ["<esc>"] = actions.close,
+                ["<CR>"] = actions.select_default,
+                ["<C-x>"] = actions.select_horizontal,
+                ["<C-v>"] = actions.select_vertical,
+                ["<C-t>"] = actions.select_tab,
+                ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                ["j"] = actions.move_selection_next,
+                ["k"] = actions.move_selection_previous,
+                ["<Down>"] = actions.move_selection_next,
+                ["<Up>"] = actions.move_selection_previous,
+                ["gg"] = actions.move_to_top,
+                ["G"] = actions.move_to_bottom,
+                ["<C-u>"] = actions.preview_scrolling_up,
+                ["<C-d>"] = actions.preview_scrolling_down,
+                ["<PageUp>"] = actions.results_scrolling_up,
+                ["<PageDown>"] = actions.results_scrolling_down,
+                ["?"] = actions.which_key,
+            },
+        },
+    },
     extensions = {
-    --     project = {
-    --         base_dirs = {
-    --             '~/prog',
-    --             '~/Notes',
-    --         },
-    --         hidden_files = true,
-    --         theme = "dropdown",
-    --         order_by = "asc",
-    --         search_by = "recent",
-    --     },
         fzf = {
             fuzzy = true,
+        },
+        file_browser = {
+            hijack_netrw = false,
+            mappings = {
+                ["i"] = {
+                    ['<Left>'] = fb_actions.goto_parent_dir,
+                },
+                ["n"] = {
+                },
+            },
         }
     }
 }
@@ -22,9 +80,12 @@ require('telescope').setup {
 -- https://github.com/nvim-telescope/telescope-fzf-native.nvim
 require('telescope').load_extension('fzf')
 
-local function nmap(k, v, desc)
-    vim.keymap.set('n', k, v, { desc = desc })
-end
+--File browser plugin
+require("telescope").load_extension("file_browser")
+
+telescope.load_extension('media_files')
+
+local jlib = require('jlib')
 
 local builtin = require('telescope.builtin')
 
@@ -37,27 +98,25 @@ local builtin = require('telescope.builtin')
 -- Or even easier:
 -- :Telescope git_bcommits
 
-nmap('<leader><leader>', builtin.find_files, 'Telescope find files')
-nmap('<leader>*', builtin.grep_string, 'Telescope grep')
-nmap('<leader>bb', builtin.buffers, 'list buffers')
-nmap('<leader>ts', builtin.live_grep, 'live grep')
-nmap('<leader>tt', builtin.help_tags, 'help_tags')
-nmap('<leader>tc', builtin.commands, 'commands')
-nmap('<leader>th', builtin.command_history, 'command_history')
+jlib.nmap('<leader><leader>', builtin.find_files, 'Telescope find files')
+jlib.nmap('<leader>*', builtin.grep_string, 'Telescope grep')
+jlib.nmap('<leader>bb', builtin.buffers, 'list buffers')
+jlib.nmap('<leader>ts', builtin.live_grep, 'live grep')
+jlib.nmap('<leader>tt', builtin.help_tags, 'help_tags')
+jlib.nmap('<leader>tc', builtin.commands, 'commands')
+jlib.nmap('<leader>th', builtin.command_history, 'command_history')
 
 local function all_man_pages()
     builtin.man_pages({ sections = { 'ALL' } })
 end
 
-nmap('<leader>tm', all_man_pages, 'man_pages')
+jlib.nmap('<leader>tm', all_man_pages, 'man_pages')
 
-nmap('<leader>gf', builtin.git_files, 'search git files')
-nmap('<leader>gb', builtin.git_branches, 'git branches')
-nmap('<leader>gc', builtin.git_commits, 'git commits')
+jlib.nmap('<leader>gf', builtin.git_files, 'search git files')
+jlib.nmap('<leader>gb', builtin.git_branches, 'git branches')
+jlib.nmap('<leader>gc', builtin.git_commits, 'git commits')
 
--- local project = require 'telescope'.load_extension('project')
-
--- nmap('<leader>pp', project.project, 'Projects')
+jlib.nmap('<leader>fo', ':Telescope file_browser<Cr>', 'File browser')
 
 -- Fuzzy finding, from the kickstarter plugin.
 vim.keymap.set('n', '<leader>/', function()

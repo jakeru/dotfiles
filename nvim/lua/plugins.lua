@@ -25,8 +25,8 @@ return {
         'kylechui/nvim-surround',
         config = true,
     },
+    -- An alternative file explorer
     {
-        -- An alternative file explorer
         "nvim-neo-tree/neo-tree.nvim",
         version = "v2.x",
         dependencies = {
@@ -45,15 +45,6 @@ return {
         'nvim-lualine/lualine.nvim',
         dependencies = {
             'nvim-tree/nvim-web-devicons'
-        },
-        config = true,
-        opts = {
-            options = {
-                icons_enabled = false,
-                theme = 'onedark',
-                component_separators = '|',
-                section_separators = '',
-            },
         },
     },
     {
@@ -105,12 +96,16 @@ return {
     {
         'windwp/nvim-autopairs',
     },
+    -- Easier word navigation
+    {
+        'chaoren/vim-wordmotion',
+    },
     -- A yank key ring like in Emacs
     {
         'gbprod/yanky.nvim',
     },
+    -- Trim trailing spaces
     {
-        -- Trim trailing spaces
         'lewis6991/spaceless.nvim',
         config = true
     },
@@ -153,8 +148,10 @@ return {
             'L3MON4D3/LuaSnip',
         },
     },
-    -- git
-    --
+    -- A bunch of snippets from different programming languages
+    {
+        '/rafamadriz/friendly-snippets',
+    },
     -- Color schemes
     {
         'folke/tokyonight.nvim',
