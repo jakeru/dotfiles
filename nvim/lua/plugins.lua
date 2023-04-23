@@ -61,8 +61,16 @@ return {
     {
         'mbbill/undotree',
     },
+    -- Git by typing Git
+    -- `Git` for status
+    -- `Git help` for help
     {
         'tpope/vim-fugitive',
+    },
+    -- Git to show signs in the margin
+    -- `Gitsigns toggle_signs` to toggle
+    {
+        'lewis6991/gitsigns.nvim',
     },
     -- Navigation
     -- Quickly jump around in the text
