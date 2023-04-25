@@ -23,7 +23,6 @@ return {
     },
     {
         'kylechui/nvim-surround',
-        config = true,
     },
     -- An alternative file explorer
     {
