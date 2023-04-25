@@ -147,13 +147,6 @@ function setup_autorandr() {
     symlink "$SCRIPT_DIR/autorandr" "$HOME/.config/autorandr"
 }
 
-function setup_ssh() {
-    echo Setting up ssh...
-    symlink "$SCRIPT_DIR/ssh/config" "$HOME/.ssh/config"
-    symlink "$SCRIPT_DIR/ssh/wittra.cfg" "$HOME/.ssh/wittra.cfg"
-    symlink "$SCRIPT_DIR/ssh/private.cfg" "$HOME/.ssh/private.cfg"
-}
-
 function setup_alacritty() {
     echo Setting up alacritty...
     symlink "$SCRIPT_DIR/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
@@ -211,7 +204,6 @@ setup_i3
 setup_docker
 setup_zsh
 setup_autorandr
-setup_ssh
 setup_alacritty
 setup_dot_profile
 setup_gdb
