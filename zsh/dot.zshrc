@@ -216,10 +216,6 @@ path+=("$HOME/.platformio/penv/bin")
 # Nix
 path+=(/nix/store/nzp4m3cmm7wawk031byh8jg4cdzjq212-nix-2.3.16/bin)
 
-# gcloud - Google Cloud Services
-source $HOME/google-cloud-sdk/completion.zsh.inc
-source $HOME/google-cloud-sdk/path.zsh.inc
-
 # pyenv https://github.com/pyenv/pyenv
 PYENV_ROOT="$HOME/prog/apps/pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
