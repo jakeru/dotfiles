@@ -19,6 +19,7 @@ tree = log --graph --decorate --pretty=oneline --abbrev-commit
 ctree = log --color --pretty=format:'%C(bold green)%h%Creset %ad: %s%d %C(green)[%C(bold blue)%an%Creset%C(green)]%Creset' --graph --date=short
 sw=stash --keep-index
 sl=stash list --date=iso
+ll=log --pretty=format:'%C(green)%h%C(reset) %as %C(blue)%an%C(reset) %s'
 
 [user]
 name = Jakob Ruhe
@@ -44,6 +45,12 @@ new = green
 added = yellow
 changed = green
 untracked = cyan
+
+[rebase]
+instructionFormat = "[%an @ %ai] %s"
+
+[format]
+pretty=fuller
 
 [init]
 defaultBranch = main
