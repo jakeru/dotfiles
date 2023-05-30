@@ -51,7 +51,7 @@ vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleBackward)")
 vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleForward)")
 
-vim.keymap.set({ "x" }, "y", "<Plug>(YankyYank)")
+vim.keymap.set({ 'x', 'v' }, "y", "<Plug>(YankyYank)")
 
 jlib.nmap('<Leader>ty',
     require("telescope").extensions.yank_history.yank_history,
