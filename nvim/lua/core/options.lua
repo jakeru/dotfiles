@@ -41,6 +41,10 @@ vim.opt.tabstop = 4
 -- Set numbered lines
 vim.opt.number = true
 
+-- Show tabs
+-- Use the command 'set invlist' to toggle this feature
+vim.opt.listchars='tab:▷▷⋮'
+
 -- set relative numbered lines
 vim.opt.relativenumber = false
 
