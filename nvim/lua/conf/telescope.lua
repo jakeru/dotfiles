@@ -98,9 +98,13 @@ local builtin = require('telescope.builtin')
 -- Or even easier:
 -- :Telescope git_bcommits
 
+local function list_buffers()
+    builtin.buffers({ ignore_current_buffer = true, sort_mru = true })
+end
+
 jlib.nmap('<leader><leader>', builtin.find_files, 'Telescope find files')
 jlib.nmap('<leader>*', builtin.grep_string, 'Telescope grep')
-jlib.nmap('<leader>bb', builtin.buffers, 'list buffers')
+jlib.nmap('<leader>bb', list_buffers, 'list buffers')
 jlib.nmap('<leader>ts', builtin.live_grep, 'live grep')
 jlib.nmap('<leader>tt', builtin.help_tags, 'help_tags')
 jlib.nmap('<leader>tc', builtin.commands, 'commands')
