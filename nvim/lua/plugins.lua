@@ -39,6 +39,11 @@ return {
         'skosulor/nibbler',
         config = true,
     },
+    {
+        -- Delete a buffer using `Bdelete`.
+        -- This keeps the window open, which `bdelete` does not.
+        "famiu/bufdelete.nvim",
+    },
     -- An alternative status bar
     {
         'nvim-lualine/lualine.nvim',

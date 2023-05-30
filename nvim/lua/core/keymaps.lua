@@ -8,7 +8,7 @@ jlib.nmap('<C-l>', ':bnext<cr>', 'Next buffer')
 jlib.nmap('<C-h>', ':bprevious<cr>', 'Previous buffer')
 jlib.nmap('<leader>bl', ':bnext<cr>', 'Next buffer')
 jlib.nmap('<leader>bh', ':bprevious<cr>', 'Previous buffer')
-jlib.nmap('<Leader>bd', ':bdelete<cr>', 'Delete buffer')
+jlib.nmap('<Leader>bd', ':Bdelete<cr>', 'Delete buffer')
 
 -- Navigate windows
 jlib.nmap('<C-w>d', ':close<cr>', 'Close window')
