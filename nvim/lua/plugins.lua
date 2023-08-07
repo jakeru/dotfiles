@@ -99,10 +99,7 @@ return {
     },
     -- Add and remove comments
     {
-        -- "gc" to line comments
-        -- "gb" for block comments
         'numToStr/Comment.nvim',
-        opts = {}
     },
     -- Editing
     {
