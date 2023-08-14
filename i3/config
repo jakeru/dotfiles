@@ -188,6 +188,9 @@ bar {
         modifier $mod
 }
 
+# No need to always show borders
+hide_edge_borders smart
+
 # Lock
 bindsym $mod+Escape exec "i3lock --color=000000"
 
