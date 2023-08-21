@@ -132,6 +132,18 @@ If LANG is 'sv', Swedish will be used, otherwise English."
   (jr-insert-current-date-in-lang ispell-current-dictionary)
 )
 
+(defun jr-insert-current-date-en ()
+  "Insert the current date into the current buffer."
+  (interactive)
+  (jr-insert-current-date-in-lang "en")
+)
+
+(defun jr-insert-current-date-sv ()
+  "Insert the current date into the current buffer."
+  (interactive)
+  (jr-insert-current-date-in-lang "sv")
+)
+
 (defun jr-insert-current-time ()
   "Insert the current time into the current buffer."
        (interactive)
@@ -141,7 +153,8 @@ If LANG is 'sv', Swedish will be used, otherwise English."
 ;; (map! :i "\C-cd" 'jr-insert-current-date)
 ;;
 (map! :i "\C-cD" 'org-time-stamp-inactive)
-(map! :i "\C-cd" 'jr-insert-current-date)
+(map! :i "\C-cd" 'jr-insert-current-date-en)
+(map! :i "\C-cs" 'jr-insert-current-date-sv)
 (map! :i "\C-ct" 'jr-insert-current-time)
 (map! :i "\C-h" 'evil-delete-backward-char)
 ;; (map! :i "\C-j" 'evil-ret)
