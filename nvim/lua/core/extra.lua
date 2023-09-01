@@ -7,5 +7,5 @@ local function create_user_command(name, expand_str)
 end
 
 create_user_command("CopyPath", "%:p")
-create_user_command("CopyRelPath", "%:r")
+create_user_command("CopyRelPath", "%")
 create_user_command("CopyFileTitle", "%:t")
