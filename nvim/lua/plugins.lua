@@ -198,6 +198,18 @@ return {
     {
         "ahmedkhalf/project.nvim",
     },
+    -- Columnize selected lines
+    {
+        'jakeru/columnize.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+        config = function()
+            require('columnize').setup()
+            vim.keymap.set("v", "<Leader>c", require('columnize').columnize,
+                { desc = "Columnize selected lines" })
+        end
+    },
     -- LSP Zero
     --[[ {
         'VonHeikemen/lsp-zero.nvim',
