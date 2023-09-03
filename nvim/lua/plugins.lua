@@ -131,6 +131,9 @@ return {
     {
         'nvim-treesitter/nvim-treesitter-context',
     },
+    {
+        'nvim-treesitter/playground',
+    },
     -- LSP
     {
         'neovim/nvim-lspconfig',
