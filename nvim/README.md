@@ -6,9 +6,12 @@
 2023-03-30: Solved using `vim.o.signcolumn = 'number'`
 
 ### DONE: Jump around quickly in the buffer like evil snipe
-2023-03-30: Solved using module `phaazon/hop.nvim`.
+2023-03-30: Solved using module
+[phaazon/hop.nvim](https://www.github.com/phaazon/hop.nvim).
 
-### TODO: Yank stack like emacs
+### DONE: Yank stack like emacs
+2023-04-12: Solved using plugin
+[gbprod/yanky.nvim](https://www.github.com/gbprod/yanky.nvim)
 
 ## Ensure a module is installed before configuring it
 From Neovim - [Bufferline Buffers vs Tabs vs Windows Explanation](https://www.youtube.com/watch?v=vJAmjAax2H0)
