@@ -38,10 +38,41 @@ cmp.setup({
         end, { 'i', 's' }),
     }),
     sources = {
+        { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'luasnip' },
-        { name = 'buffer' },
+        { name = 'buffer',                 keyword_length = 4 },
         { name = 'path' },
     },
+    formatting = {
+        format = require('lspkind').cmp_format({
+            mode = 'symbol_text',
+            preset = 'default',
+            max_width = 50,
+            menu = {
+                buffer = '[buf]',
+                nvim_lsp = '[lsp]',
+                luasnip = '[snip]'
+            }
+        })
+    },
+})
+
+-- `/` cmdline setup.
+cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = 'buffer' }
+    }
+})
+
+-- `:` cmdline setup.
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        { name = 'cmdline' }
+    })
 })
