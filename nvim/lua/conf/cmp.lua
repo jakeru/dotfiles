@@ -15,9 +15,17 @@ cmp.setup({
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-h>'] = cmp.mapping.abort(),
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-l>'] = cmp.mapping.confirm({
-            select = true,
-        }),
+        ['<C-l>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.confirm({select = true})
+            elseif luasnip.expandable() then
+                luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
         ['<C-j>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -38,11 +46,11 @@ cmp.setup({
         end, { 'i', 's' }),
     }),
     sources = {
+        { name = 'luasnip', keyword_length = 2 },
         { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
-        { name = 'luasnip' },
-        { name = 'buffer',                 keyword_length = 4 },
+        { name = 'buffer', keyword_length = 4 },
         { name = 'path' },
     },
     formatting = {
@@ -56,6 +64,13 @@ cmp.setup({
                 luasnip = '[snip]'
             }
         })
+    },
+    window = {
+        documentation = cmp.config.window.bordered(),
+    },
+    experimental = {
+        ghost_text = true,
+        native_menu = false,
     },
 })
 
