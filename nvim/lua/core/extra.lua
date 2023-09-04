@@ -9,3 +9,11 @@ end
 create_user_command("CopyPath", "%:p")
 create_user_command("CopyRelPath", "%")
 create_user_command("CopyFileTitle", "%:t")
+
+-- Enable spelling for some filetypes
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = {'markdown', 'text', 'gitcommit'},
+    callback = function()
+        vim.opt_local.spell = true
+    end
+})
