@@ -89,7 +89,7 @@ function setup_inputrc() {
 function setup_git() {
     echo Setting up git...
     symlink "$SCRIPT_DIR/git/dot.gitconfig" "$HOME/.gitconfig"
-    symlink "$SCRIPT_DIR/git/dot.gitexcludes" "$HOME/.gitexcludes"
+    symlink "$SCRIPT_DIR/git/ignore" "$HOME/.config/git/ignore"
 }
 
 function setup_vscode() {
