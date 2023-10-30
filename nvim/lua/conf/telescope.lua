@@ -103,12 +103,28 @@ local function list_buffers()
 end
 
 jlib.nmap('<leader><leader>', builtin.find_files, 'Telescope find files')
-jlib.nmap('<leader>*', builtin.grep_string, 'Telescope grep')
+
 jlib.nmap('<leader>bb', list_buffers, 'list buffers')
-jlib.nmap('<leader>ts', builtin.live_grep, 'live grep')
+
+jlib.nmap('<leader>*', builtin.grep_string, 'Telescope grep')
+jlib.nmap('<leader>tg', builtin.live_grep, 'live grep')
+
 jlib.nmap('<leader>tt', builtin.help_tags, 'help_tags')
 jlib.nmap('<leader>tc', builtin.commands, 'commands')
 jlib.nmap('<leader>th', builtin.command_history, 'command_history')
+
+jlib.nmap('<leader>ts', builtin.treesitter, 'Symbols')
+jlib.nmap('<leader>tlr', builtin.lsp_references, 'lsp_references')
+jlib.nmap('<leader>tli', builtin.lsp_incoming_calls, 'lsp_incoming_calls')
+jlib.nmap('<leader>tlo', builtin.lsp_outgoing_calls, 'lsp_outgoing_calls')
+jlib.nmap('<leader>tls', builtin.lsp_document_symbols, 'lsp_document_symbols')
+
+local function diagnostics_in_current_buffer()
+    builtin.diagnostics({bufnr=0})
+end
+
+jlib.nmap('<leader>tld', diagnostics_in_current_buffer, 'Diagnostics in buffer')
+jlib.nmap('<leader>tlD', builtin.diagnostics, 'Diagnostics in workspace')
 
 local function all_man_pages()
     builtin.man_pages({ sections = { 'ALL' } })
