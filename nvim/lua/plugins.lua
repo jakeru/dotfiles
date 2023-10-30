@@ -89,11 +89,14 @@ return {
     -- Add indentation guides even on blank lines
     {
         'lukas-reineke/indent-blankline.nvim',
-        -- See `:help indent_blankline.txt`
+        main = 'ibl',
+        -- See `:help ibl.txt`
         config = function()
-            require('indent_blankline').setup({
-                char = '┊',
-                show_trailing_blankline_indent = false
+            require('ibl').setup({
+                whitespace = {
+                    highlight = { "Whitespace", "NonText" },
+                    remove_blankline_trail = true,
+                },
             })
         end
     },
@@ -118,9 +121,17 @@ return {
         'lewis6991/spaceless.nvim',
         config = true
     },
+    -- Folding
+    {
+        'kevinhwang91/nvim-ufo',
+        dependencies = {
+            'kevinhwang91/promise-async'
+        },
+    },
     -- Syntax highlighting using tree-sitter
     {
         'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
     },
     {
         'nvim-treesitter/nvim-treesitter-textobjects',
@@ -141,13 +152,17 @@ return {
             -- Automatically install LSPs to stdpath for neovim
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
-
-            -- Useful status updates for LSP.
-            {
-                'j-hui/fidget.nvim',
-                config = true,
-            },
         },
+    },
+    -- Useful status updates for LSP.
+    {
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        config = true,
+    },
+    -- Debugging
+    {
+        'mfussenegger/nvim-dap',
     },
     -- Autocompletion and snippets
     {
@@ -159,9 +174,12 @@ return {
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-cmdline',
             'saadparwaiz1/cmp_luasnip',
-            'L3MON4D3/LuaSnip',
             'onsails/lspkind.nvim',
         },
+    },
+    {
+        'L3MON4D3/LuaSnip',
+        tag = "v2.0.0",
     },
     -- A bunch of snippets from different programming languages
     {
