@@ -1,4 +1,8 @@
-require('tokyonight').setup({
+local tokyonight_loaded, tokyonight = pcall(require, 'tokyonight')
+
+if not tokyonight_loaded then return end
+
+tokyonight.setup({
   -- From https://github.com/folke/tokyonight.nvim
 
   style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`

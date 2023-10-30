@@ -1,9 +1,10 @@
 -- nvim-cmp setup
 -- Inspired by nvim-kickstart
 --
-local luasnip = require('luasnip')
-local cmp = require('cmp')
+local luasnip_loaded, luasnip = pcall(require, 'luasnip')
+if not luasnip_loaded then return end
 
+local cmp = require('cmp')
 cmp.setup({
     snippet = {
         expand = function(args)
