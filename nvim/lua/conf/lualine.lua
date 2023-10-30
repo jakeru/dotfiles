@@ -8,7 +8,7 @@ end
 
 lualine.setup({
     options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'auto',
         component_separators = '|',
         section_separators = '',
@@ -29,7 +29,7 @@ lualine.setup({
         lualine_a = {},
         lualine_b = { 'branch', 'diff', 'diagnostics' },
         lualine_c = { 'filename' },
-        lualine_x = { 'encoding', 'fileformat' },
+        lualine_x = { 'filetype', 'encoding', 'fileformat' },
         lualine_y = {},
         lualine_z = { 'location' }
     },
