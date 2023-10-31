@@ -186,6 +186,7 @@ bar {
         status_command i3status
         mode dock
         modifier $mod
+        tray_output primary
 }
 
 # No need to always show borders
