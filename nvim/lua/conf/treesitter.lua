@@ -67,7 +67,7 @@ local servers = {
 require('nvim-treesitter.configs').setup({
     -- A list of parser names, or "all".
     -- (the listed parsers should always be installed).
-    ensure_installed = { "c", "lua", "vim", "help", "query", "python" },
+    ensure_installed = { "c", "lua", "vim", "query", "python" },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = true,
