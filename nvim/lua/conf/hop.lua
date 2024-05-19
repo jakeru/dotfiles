@@ -25,7 +25,7 @@ end, 'Hop 2 char')
 
 -- Jump to a word on the screen.
 jlib.map(modes, '<leader>w', function()
-  hop.hint_words()
+  hop.hint_words({})
 end, 'Hop word')
 
 -- Jump to line on the screen.

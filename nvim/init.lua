@@ -2,7 +2,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Setup basics 
+-- Setup basics
 require('core.lazy')
 require('core.keymaps')
 require('core.options')
@@ -25,5 +25,6 @@ require('conf.project')
 require('conf.telescope')
 require('conf.treesitter')
 require('conf.surround')
-require('conf.ufo')
 require('conf.yanky')
+require('conf.mini')
+require('conf.markdown-preview')

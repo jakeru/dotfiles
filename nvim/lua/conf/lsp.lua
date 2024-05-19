@@ -10,7 +10,13 @@ local on_attach = function(_, bufnr)
     -- NOTE: Remember that lua is a real programming language, and as such it is possible
     -- to define small helper and utility functions so you don't have to repeat yourself
     -- many times.
-    --
+
+    local diags = true
+
+    local toggle_diagnostics = function()
+        diags = not diags
+    end
+
     -- In this case, we create a function that lets us more easily define mappings specific
     -- for LSP related items. It sets the mode, buffer and description for us each time.
     local nmap = function(keys, func, desc)
@@ -33,13 +39,16 @@ local on_attach = function(_, bufnr)
                     prefix = ' ',
                     scope = 'line',
                 }
-                vim.diagnostic.open_float(nil, opts)
+                if diags then
+                    vim.diagnostic.open_float(nil, opts)
+                end
             end
         })
     end
 
     nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+    nmap('<leader>ctd', toggle_diagnostics, '[C]ode [T]oggle [D]iagnostics')
 
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
     nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -73,7 +82,7 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
     -- gopls = {},
-    -- rust_analyzer = {},
+    rust_analyzer = {},
     -- tsserver = {},
     clangd = {},
     pyright = {},
@@ -81,6 +90,9 @@ local servers = {
         Lua = {
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },
+            diagnostics = {
+                globals = { "vim" },
+            },
         },
     },
 }

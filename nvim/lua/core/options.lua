@@ -78,4 +78,4 @@ vim.diagnostic.config({
 -- 'yes:n': always reserve `n` spaces for signs left of line numbers
 -- Tip found at:
 -- https://www.reddit.com/r/neovim/comments/neaeej/only_just_discovered_set_signcolumnnumber_i_like/
-vim.o.signcolumn = 'number'
+vim.o.signcolumn = 'auto'

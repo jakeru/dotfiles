@@ -79,7 +79,7 @@ return {
     -- Navigation
     -- Quickly jump around in the text
     {
-        'phaazon/hop.nvim',
+        'smoka7/hop.nvim',
     },
     -- Quickly jump between buffers
     {
@@ -116,17 +116,32 @@ return {
     {
         'gbprod/yanky.nvim',
     },
-    -- Trim trailing spaces
+    -- Trim trailing spaces, with user command `:Trim`
     {
-        'lewis6991/spaceless.nvim',
-        config = true
+        'cappyzawa/trim.nvim',
+        config = function()
+            require("trim").setup({
+                trim_on_write = false,
+            })
+        end
     },
-    -- Folding
+    -- Misc plugins
     {
-        'kevinhwang91/nvim-ufo',
-        dependencies = {
-            'kevinhwang91/promise-async'
-        },
+        'echasnovski/mini.nvim',
+        version = '*',
+    },
+    -- Typst https://typst.app/
+    {
+      'kaarmu/typst.vim',
+      ft = 'typst',
+      lazy = false,
+    },
+    -- markdown preview
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
     },
     -- Syntax highlighting using tree-sitter
     {
@@ -183,7 +198,7 @@ return {
     },
     -- A bunch of snippets from different programming languages
     {
-        '/rafamadriz/friendly-snippets',
+        'rafamadriz/friendly-snippets',
     },
     -- Color schemes
     {
@@ -219,9 +234,14 @@ return {
     {
         "ahmedkhalf/project.nvim",
     },
+    -- Logging framework
+    -- Useful when debugging
+    {
+        'tjdevries/vlog.nvim',
+    },
     -- Columnize selected lines
     {
-        'jakeru/columnize.nvim',
+       'jakeru/columnize.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
         },
@@ -229,6 +249,13 @@ return {
             require('columnize').setup()
             vim.keymap.set("v", "<Leader>c", require('columnize').columnize,
                 { desc = "Columnize selected lines" })
+        end
+    },
+    -- Join selected lines
+    {
+        'jakeru/join.nvim',
+        config = function()
+            require('join').setup()
         end
     },
     -- LSP Zero
