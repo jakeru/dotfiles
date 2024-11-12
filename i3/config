@@ -199,11 +199,8 @@ bindsym $mod+Escape exec "i3lock --color=000000"
 bindsym $mod+Control+l move workspace to output right
 bindsym $mod+Control+h move workspace to output left
 
-# Switch keyboard layout
-exec "setxkbmap -layout us,se -option 'grp:alt_shift_toggle'"
-
 # Take a screenshot
-bindsym Print exec flameshot gui
+bindsym Print exec --no-startup-id flameshot gui
 
 # Use a randomized background
 exec /usr/bin/feh --bg-fill --randomize ~/Dropbox/Media/Bakgrunder/* --bg-fill --randomize ~/Dropbox/Media/Bakgrunder/*
