@@ -17,6 +17,7 @@ bd=branch -a --sort=-committerdate
 reflogd=reflog --date=iso
 tree = log --graph --decorate --pretty=oneline --abbrev-commit
 ctree = log --color --pretty=format:'%C(bold green)%h%Creset %ad: %s%d %C(green)[%C(bold blue)%an%Creset%C(green)]%Creset' --graph --date=short
+dtree = log --pretty=format:'%ad %s%d [%an]' --date=short
 sw=stash --keep-index
 sl=stash list --date=iso
 ll=log --pretty=format:'%C(green)%h%C(reset) %as %C(blue)%an%C(reset) %s'
@@ -72,5 +73,8 @@ cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
 
 [init]
 defaultBranch = main
+
 [credential]
-	helper = store
+helper = store
+[rerere]
+	enabled = true
