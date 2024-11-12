@@ -187,6 +187,21 @@ function setup_tmux() {
     symlink "$SCRIPT_DIR/tmux/dot.tmux.conf" "$HOME/.tmux.conf"
 }
 
+function setup_ripgrep() {
+    echo Setting up ripgrep...
+    symlink "$SCRIPT_DIR/ripgrep/dot.ripgreprc" "$HOME/.ripgreprc"
+}
+
+function setup_gitui() {
+    echo Setting up gitui...
+    symlink "$SCRIPT_DIR/gitui/key_bindings.ron" "$HOME/.config/gitui/key_bindings.ron"
+}
+
+function setup_helix() {
+    echo Setting up helix...
+    symlink "$SCRIPT_DIR/helix/helix.toml" "$HOME/.config/helix/helix.toml"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -212,5 +227,8 @@ setup_curl
 setup_nvim
 setup_kitty
 setup_tmux
+setup_ripgrep
+setup_gitui
+setup_helix
 
 echo Operation completed.
