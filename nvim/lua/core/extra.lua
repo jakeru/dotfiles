@@ -10,11 +10,18 @@ create_user_command("CopyPath", "%:p")
 create_user_command("CopyRelPath", "%:~:.")
 create_user_command("CopyFileTitle", "%:t")
 
--- Enable spelling and word wrapping for some file types
+-- Enable word wrapping for some file types
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { 'markdown', 'text', 'gitcommit', 'c', 'lua', 'rust', 'python', 'typst' },
+    pattern = { 'markdown', 'text', 'gitcommit' },
+    callback = function()
+        vim.opt_local.textwidth = 80
+    end
+})
+
+-- Enable spell checking for some file types.
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'markdown', 'text', 'gitcommit', 'rust', 'python', 'typst' },
     callback = function()
         vim.opt_local.spell = true
-        vim.opt_local.textwidth = 80
     end
 })
