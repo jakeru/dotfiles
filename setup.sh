@@ -202,6 +202,11 @@ function setup_helix() {
     symlink "$SCRIPT_DIR/helix/helix.toml" "$HOME/.config/helix/helix.toml"
 }
 
+function setup_bat() {
+    echo Setting up bat...
+    symlink "$SCRIPT_DIR/bat/config" "$HOME/.config/bat/config"
+}
+
 # Main
 
 SCRIPT="$(readlinkf $0)"
@@ -230,5 +235,6 @@ setup_tmux
 setup_ripgrep
 setup_gitui
 setup_helix
+setup_bat
 
 echo Operation completed.
