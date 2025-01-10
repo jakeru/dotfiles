@@ -16,14 +16,14 @@ source ~/.zplug/init.zsh
 autoload -U colors && colors
 
 # Basic auto/tab complete:
-autoload -U compinit
+autoload -U compinit && compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' file-sort modification
 
 # Auto complete with case insenstivity
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 zmodload zsh/complist
-compinit
 # Include hidden files.
 _comp_options+=(globdots)
 
@@ -236,7 +236,6 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-# Add a newline at the end of the Agnoster prompt
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
       print -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
@@ -247,7 +246,7 @@ prompt_end() {
   print -n "%{%f%}"
   CURRENT_BG=''
 
-  # Adds the new line
+  # Adds a new line.
   printf "\n#";
 }
 
