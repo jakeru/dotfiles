@@ -1,25 +1,11 @@
 return {
     {
-        'folke/neoconf.nvim',
-        cmd = "Neoconf"
-    },
-    {
-        'folke/neodev.nvim',
-        config = true,
-    },
-    {
         'folke/which-key.nvim',
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
-            require("which-key").setup({
-            })
+            require("which-key").setup()
         end,
-    },
-    {
-        'ziontee113/color-picker.nvim',
-        cmd = 'PickColor',
-        config = true,
     },
     {
         'kylechui/nvim-surround',
@@ -50,17 +36,6 @@ return {
         dependencies = {
             'nvim-tree/nvim-web-devicons'
         },
-    },
-    {
-        -- Example of usage:
-        -- :Bufferize messages
-        -- :Bufferize digraphs
-        -- :Bufferize map
-        -- :Bufferize command
-        'AndrewRadev/bufferize.vim'
-    },
-    {
-        'wesleimp/stylua.nvim'
     },
     {
         'mbbill/undotree',
@@ -125,23 +100,11 @@ return {
             })
         end
     },
-    -- Misc plugins
-    {
-        'echasnovski/mini.nvim',
-        version = '*',
-    },
     -- Typst https://typst.app/
     {
-      'kaarmu/typst.vim',
-      ft = 'typst',
-      lazy = false,
-    },
-    -- markdown preview
-    {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
+        'kaarmu/typst.vim',
+        ft = 'typst',
+        lazy = false,
     },
     -- Syntax highlighting using tree-sitter
     {
@@ -150,34 +113,17 @@ return {
     },
     {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        config = function()
-            require('nvim-treesitter.configs').setup({})
-        end
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
-    },
-    {
-        'nvim-treesitter/playground',
     },
     -- LSP
     {
         'neovim/nvim-lspconfig',
         dependencies = {
-            -- Automatically install LSPs to stdpath for neovim
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
         },
-    },
-    -- Useful status updates for LSP.
-    {
-        'j-hui/fidget.nvim',
-        tag = 'legacy',
-        config = true,
-    },
-    -- Debugging
-    {
-        'mfussenegger/nvim-dap',
     },
     -- Autocompletion and snippets
     {
@@ -230,10 +176,6 @@ return {
             return vim.fn.executable 'make' == 1
         end,
     },
-    -- Project
-    {
-        "ahmedkhalf/project.nvim",
-    },
     -- Logging framework
     -- Useful when debugging
     {
@@ -258,27 +200,4 @@ return {
             require('join').setup()
         end
     },
-    -- LSP Zero
-    --[[ {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
-        dependencies = {
-            -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required
-            {'williamboman/mason.nvim'},           -- Optional
-            {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-            -- Autocompletion
-            {'hrsh7th/nvim-cmp'},         -- Required
-            {'hrsh7th/cmp-nvim-lsp'},     -- Required
-            -- {'hrsh7th/cmp-buffer'},       -- Optional
-            -- {'hrsh7th/cmp-path'},         -- Optional
-            -- {'saadparwaiz1/cmp_luasnip'}, -- Optional
-            -- {'hrsh7th/cmp-nvim-lua'},     -- Optional
-
-            -- Snippets
-            {'L3MON4D3/LuaSnip'},             -- Required
-            -- {'rafamadriz/friendly-snippets'}, -- Optional
-        }
-    }, ]]
 }
