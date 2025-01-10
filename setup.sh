@@ -5,7 +5,7 @@ set -e
 # Get absolute path of a file.
 # From:
 # https://stackoverflow.com/questions/1055671/how-can-i-get-the-behavior-of-gnus-readlink-f-on-a-mac
-readlinkf() {
+function readlinkf() {
     perl -MCwd -e 'print Cwd::abs_path shift' "$1"
 }
 
@@ -54,17 +54,6 @@ function append_if_not_present() {
     fi
 }
 
-function setup_emacs_no_longer_used() {
-    echo Setting up Emacs...
-    makedir "$HOME/.emacs.d"
-    download \
-        "https://raw.githubusercontent.com/hrs/sensible-defaults.el/main/sensible-defaults.el" \
-        "downloads/emacs/sensible-defaults.el"
-    symlink "$SCRIPT_DIR/emacs/init.el" "$HOME/.emacs.d/init.el"
-    symlink "$SCRIPT_DIR/emacs/configuration.org" "$HOME/.emacs.d/configuration.org"
-    symlink "$SCRIPT_DIR/downloads/emacs/sensible-defaults.el" "$HOME/.emacs.d/sensible-defaults.el"
-}
-
 function setup_doom_emacs() {
     echo Setting up Doom Emacs...
     makedir "$HOME/.doom.d"
@@ -78,7 +67,7 @@ function setup_doom_emacs() {
         echo Install with:
         echo git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
     fi
-    pip3 install cmake-language-server
+    pip3 install --user cmake-language-server
 }
 
 function setup_inputrc() {
