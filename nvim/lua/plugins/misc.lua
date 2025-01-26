@@ -36,6 +36,15 @@ return {
     {
         'mbbill/undotree',
     },
+    {
+        'rmagatti/auto-session',
+        lazy = false,
+        ---@module "auto-session"
+        ---@type AutoSession.Config
+        opts = {
+            suppressed_dirs = { '~/', '~/Downloads', '/' },
+        },
+    },
     -- Git by typing Git
     -- `Git` for status
     -- `Git help` for help
