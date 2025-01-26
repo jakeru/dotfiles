@@ -136,15 +136,17 @@ return {
             'hrsh7th/cmp-cmdline',
             'saadparwaiz1/cmp_luasnip',
             'onsails/lspkind.nvim',
+            {
+                'L3MON4D3/LuaSnip',
+                build = "make install_jsregexp",
+                dependencies = {
+                    'rafamadriz/friendly-snippets',
+                }
+            },
         },
-    },
-    {
-        'L3MON4D3/LuaSnip',
-        tag = "v2.0.0",
-    },
-    -- A bunch of snippets from different programming languages
-    {
-        'rafamadriz/friendly-snippets',
+        config = function()
+            require "conf.completion"
+        end,
     },
     -- Color schemes
     {

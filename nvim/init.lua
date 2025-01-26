@@ -11,8 +11,6 @@ require('core.neovide')
 
 -- Configure plugins
 require('conf.autopairs')
-require('conf.cmp')
-require('conf.snippets')
 require('conf.colorscheme')
 require('conf.comment')
 require('conf.harpoon')
