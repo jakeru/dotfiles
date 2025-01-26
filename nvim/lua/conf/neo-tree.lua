@@ -5,6 +5,15 @@
 -- Unless you are still migrating, remove the deprecated commands from v1.x
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
+
+
+local jlib = require "jlib"
+-- toggle: toggle visibility
+-- reveal: focus on current file when Neotree opens
+-- reveal_force_cwd: focus on current file when Neotree opens
+jlib.nmap('<Leader>ff', ':Neotree toggle reveal<Cr>', 'NeoTree')
+jlib.nmap('<Leader>gg', ':Neotree float git_status<Cr>', 'NeoTree git status')
+
 -- If you want icons for diagnostic errors, you'll need to define them somewhere:
 vim.fn.sign_define("DiagnosticSignError",
     { text = " ", texthl = "DiagnosticSignError" })

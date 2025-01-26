@@ -109,6 +109,7 @@ jlib.nmap('<leader>bb', list_buffers, 'list buffers')
 jlib.nmap('<leader>*', builtin.grep_string, 'Telescope grep')
 jlib.nmap('<leader>tg', builtin.live_grep, 'live grep')
 
+jlib.nmap('<leader>tk', builtin.keymaps, 'command_history')
 jlib.nmap('<leader>tt', builtin.help_tags, 'help_tags')
 jlib.nmap('<leader>tc', builtin.commands, 'commands')
 jlib.nmap('<leader>th', builtin.command_history, 'command_history')
@@ -142,7 +143,7 @@ jlib.nmap('<leader>fo', ':Telescope file_browser<Cr>', 'File browser')
 vim.keymap.set('n', '<leader>/', function()
     -- You can pass additional configuration to telescope to change theme, layout, etc.
     require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
+        winblend = 0,
         previewer = true,
     })
 end, { desc = '[/] Fuzzily search in current buffer' })

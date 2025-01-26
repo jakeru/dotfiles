@@ -62,6 +62,9 @@ vim.opt.undofile = true
 -- shortness: avoid showing extra messages when using completion
 vim.o.completeopt = 'menu,menuone,noselect'
 
+vim.o.timeout = true
+vim.o.timeoutlen = 300
+
 -- Diagnostics
 vim.diagnostic.config({
   virtual_text = false,

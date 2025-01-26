@@ -1,11 +1,7 @@
 return {
     {
         'folke/which-key.nvim',
-        config = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-            require("which-key").setup()
-        end,
+        opts = {},
     },
     {
         'kylechui/nvim-surround',
@@ -23,7 +19,7 @@ return {
     -- Quickly switch between number formats hex/dec/bin
     {
         'skosulor/nibbler',
-        config = true,
+        opts = {},
     },
     {
         -- Delete a buffer using `Bdelete`.
@@ -128,6 +124,8 @@ return {
     -- Autocompletion and snippets
     {
         'hrsh7th/nvim-cmp',
+        lazy = false,
+        priority = 100,
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lsp-signature-help',

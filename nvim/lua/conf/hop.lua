@@ -14,9 +14,9 @@ local directions = require('hop.hint').HintDirection
 local modes = {'n', 'v', 'x'}
 
 -- Jump forward on the current line.
-jlib.map(modes, 's', function()
-  hop.hint_char2({ direction = directions.AFTER_CURSOR, current_line_only = true })
-end, 'Hop 2 char same line')
+-- jlib.map(modes, 's', function()
+--   hop.hint_char2({ direction = directions.AFTER_CURSOR, current_line_only = true })
+-- end, 'Hop 2 char same line')
 
 -- Jump to anywhere on the screen.
 jlib.map(modes, '<leader>j', function()
@@ -29,7 +29,7 @@ jlib.map(modes, '<leader>w', function()
 end, 'Hop word')
 
 -- Jump to line on the screen.
-jlib.map(modes, '<leader>l', function()
-  hop.hint_lines_skip_whitespace()
-end, 'Hop line')
+-- jlib.map(modes, '<leader>l', function()
+--   hop.hint_lines_skip_whitespace()
+-- end, 'Hop line')
 
