@@ -9,7 +9,7 @@ return {
     -- An alternative file explorer
     {
         "nvim-neo-tree/neo-tree.nvim",
-        version = "v2.x",
+        version = "v3.x",
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-tree/nvim-web-devicons',
