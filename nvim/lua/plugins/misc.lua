@@ -96,15 +96,6 @@ return {
     {
         'gbprod/yanky.nvim',
     },
-    -- Trim trailing spaces, with user command `:Trim`
-    {
-        'cappyzawa/trim.nvim',
-        config = function()
-            require("trim").setup({
-                trim_on_write = false,
-            })
-        end
-    },
     -- Typst https://typst.app/
     {
         'kaarmu/typst.vim',
