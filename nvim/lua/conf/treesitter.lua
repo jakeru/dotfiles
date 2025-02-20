@@ -1,7 +1,9 @@
 require('nvim-treesitter.configs').setup({
     -- A list of parser names, or "all".
     -- (the listed parsers should always be installed).
-    ensure_installed = { "c", "lua", "vim", "query", "python", "rust" },
+    ensure_installed = { "c", "lua", "vim", "query", "python", "rust", "org", "php" },
+
+    modules = {},
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = true,
@@ -30,7 +32,7 @@ require('nvim-treesitter.configs').setup({
         enable = true,
         keymaps = {
             -- set to `false` to disable one of the mappings
-            init_selection = "gnn", 
+            init_selection = "gnn",
             node_incremental = "grn",
             scope_incremental = "grc",
             node_decremental = "grm",

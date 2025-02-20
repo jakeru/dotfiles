@@ -104,7 +104,7 @@ end
 
 jlib.nmap('<leader><leader>', builtin.find_files, 'Telescope find files')
 
-jlib.nmap('<leader>bb', list_buffers, 'list buffers')
+jlib.nmap('<leader>bb', list_buffers, 'List buffers')
 
 jlib.nmap('<leader>*', builtin.grep_string, 'Telescope grep')
 
@@ -119,11 +119,17 @@ jlib.nmap('<leader>tt', builtin.help_tags, 'help_tags')
 jlib.nmap('<leader>tc', builtin.commands, 'commands')
 jlib.nmap('<leader>th', builtin.command_history, 'command_history')
 
-jlib.nmap('<leader>ts', builtin.treesitter, 'Symbols')
+jlib.nmap('<leader>tls', builtin.treesitter, 'Symbols')
 jlib.nmap('<leader>tlr', builtin.lsp_references, 'lsp_references')
 jlib.nmap('<leader>tli', builtin.lsp_incoming_calls, 'lsp_incoming_calls')
 jlib.nmap('<leader>tlo', builtin.lsp_outgoing_calls, 'lsp_outgoing_calls')
 jlib.nmap('<leader>tls', builtin.lsp_document_symbols, 'lsp_document_symbols')
+
+local function document_symbols_funcions()
+    builtin.lsp_document_symbols({ symbols = { "Function" } })
+end
+
+jlib.nmap('<leader>tlf', document_symbols_funcions, 'List functions in buffer')
 
 local function diagnostics_in_current_buffer()
     builtin.diagnostics({bufnr=0})
@@ -142,7 +148,7 @@ jlib.nmap('<leader>gf', builtin.git_files, 'search git files')
 jlib.nmap('<leader>gb', builtin.git_branches, 'git branches')
 jlib.nmap('<leader>gc', builtin.git_commits, 'git commits')
 
-jlib.nmap('<leader>fo', ':Telescope file_browser<Cr>', 'File browser')
+jlib.nmap('<leader>tf', ':Telescope file_browser<Cr>', 'File browser')
 
 -- Fuzzy finding, from the kickstarter plugin.
 vim.keymap.set('n', '<leader>/', function()

@@ -4,15 +4,10 @@ local jlib = require('jlib')
 jlib.nmap('<Leader>fs', ':w<Cr>')
 
 -- Navigate buffers
-jlib.nmap('<leader>bl', ':bnext<Cr>', 'Next buffer')
-jlib.nmap('<leader>bh', ':bprevious<Cr>', 'Previous buffer')
 jlib.nmap('<Leader>bd', ':Bdelete<Cr>', 'Delete buffer')
 
 -- Navigate windows
 jlib.nmap('<C-w>d', ':close<Cr>', 'Close window')
-
--- Source file
-jlib.nmap('<Leader>s', ':source<Cr>', 'Source')
 
 -- Move around
 jlib.nmap('<S-h>', '0')

@@ -118,6 +118,12 @@ return {
             'williamboman/mason-lspconfig.nvim',
         },
     },
+    -- Completions when developing nvim plugins
+    {
+        'folke/lazydev.nvim',
+        ft = "lua",
+        opts = {},
+    },
     -- Color schemes
     {
         'folke/tokyonight.nvim',

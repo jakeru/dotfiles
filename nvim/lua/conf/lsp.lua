@@ -41,7 +41,7 @@ local on_attach = function(_, bufnr)
 
     nmap('<leader>r', vim.lsp.buf.rename, 'Rename')
     nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-    nmap('<leader>ctd', toggle_diagnostics, '[C]ode [T]oggle [D]iagnostics')
+    nmap('<leader>ltd', toggle_diagnostics, 'Toggle diagnostics')
 
     nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
     nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -103,6 +103,7 @@ local mason_lspconfig = require('mason-lspconfig')
 
 mason_lspconfig.setup({
     ensure_installed = vim.tbl_keys(servers),
+    automatic_installation = false,
 })
 
 mason_lspconfig.setup_handlers({
