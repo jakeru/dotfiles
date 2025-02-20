@@ -107,7 +107,12 @@ jlib.nmap('<leader><leader>', builtin.find_files, 'Telescope find files')
 jlib.nmap('<leader>bb', list_buffers, 'list buffers')
 
 jlib.nmap('<leader>*', builtin.grep_string, 'Telescope grep')
-jlib.nmap('<leader>tg', builtin.live_grep, 'live grep')
+
+local multigrep = function()
+    require("conf.telescope_multigrep").multigrep({})
+end
+
+jlib.nmap('<leader>tg', multigrep, "Live Multi grep")
 
 jlib.nmap('<leader>tk', builtin.keymaps, 'command_history')
 jlib.nmap('<leader>tt', builtin.help_tags, 'help_tags')
