@@ -176,6 +176,11 @@ function setup_tmux() {
     symlink "$SCRIPT_DIR/tmux/dot.tmux.conf" "$HOME/.tmux.conf"
 }
 
+function setup_zellij() {
+    echo Setting up zellij...
+    symlink "$SCRIPT_DIR/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
+}
+
 function setup_ripgrep() {
     echo Setting up ripgrep...
     symlink "$SCRIPT_DIR/ripgrep/dot.ripgreprc" "$HOME/.ripgreprc"
@@ -221,6 +226,7 @@ setup_curl
 setup_nvim
 setup_kitty
 setup_tmux
+setup_zellij
 setup_ripgrep
 setup_gitui
 setup_helix
