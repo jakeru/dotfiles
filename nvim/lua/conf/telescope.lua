@@ -99,7 +99,15 @@ local builtin = require('telescope.builtin')
 -- :Telescope git_bcommits
 
 local function list_buffers()
-    builtin.buffers({ ignore_current_buffer = true, sort_mru = true })
+    builtin.buffers({
+        ignore_current_buffer = true,
+        sort_mru = true,
+        -- Keep mru sorting also when filtering:
+        -- from: https://github.com/nvim-telescope/telescope.nvim/issues/2539
+        tiebreak = function(current_entry, existing_entry, _)
+            return current_entry.index < existing_entry.index
+        end
+    })
 end
 
 jlib.nmap('<leader><leader>', builtin.find_files, 'Telescope find files')
