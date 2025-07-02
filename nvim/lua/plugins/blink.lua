@@ -43,6 +43,19 @@ return {
                     --preselect = false,
                 }
             }
-        }
+        },
+        cmdline = {
+            keymap = {
+                preset = "none",
+                ['<C-y>'] = { 'select_and_accept', 'fallback' },
+                ['<C-k>'] = { 'select_prev', },
+                ['<C-j>'] = { 'select_next', },
+            },
+            completion = {
+                menu = {
+                    auto_show = true,
+                },
+            },
+        },
     },
 }
