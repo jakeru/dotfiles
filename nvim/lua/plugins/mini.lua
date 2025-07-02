@@ -22,12 +22,18 @@ M.setup = function()
 
     require("mini.ai").setup()
 
+    -- Trailspace
     require("mini.trailspace").setup()
 
-    vim.api.nvim_create_user_command("Trim", function()
+    local trim = function()
         MiniTrailspace.trim()
         MiniTrailspace.trim_last_lines()
-    end, { desc = "Trim trailing whitespace and last lines" })
+    end
+
+    local desc = "Trim trailing whitespace and lines"
+
+    vim.api.nvim_create_user_command("Trim", trim, { desc = desc })
+    jlib.nmap("<Leader>lt", trim, desc)
 end
 
 M.plugins = {

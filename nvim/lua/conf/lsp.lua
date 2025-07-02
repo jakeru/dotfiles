@@ -76,11 +76,13 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-    -- gopls = {},
+    -- Rust
     rust_analyzer = {},
-    -- tsserver = {},
+    -- C/C++
     clangd = {},
+    -- Python
     pyright = {},
+    -- Lua
     lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },

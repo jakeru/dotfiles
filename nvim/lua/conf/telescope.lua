@@ -132,7 +132,7 @@ end
 jlib.nmap('<leader>tlf', document_symbols_funcions, 'List functions in buffer')
 
 local function diagnostics_in_current_buffer()
-    builtin.diagnostics({bufnr=0})
+    builtin.diagnostics({ bufnr = 0 })
 end
 
 jlib.nmap('<leader>tld', diagnostics_in_current_buffer, 'Diagnostics in buffer')
