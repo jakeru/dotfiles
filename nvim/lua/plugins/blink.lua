@@ -34,7 +34,9 @@ return {
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
             default = { 'lsp', 'path', 'snippets', 'buffer' },
-            min_keyword_length = 2,
+            min_keyword_length = function()
+                return vim.bo.filetype == 'markdown' and 5 or 3
+            end
         },
         completion = {
             list = {
