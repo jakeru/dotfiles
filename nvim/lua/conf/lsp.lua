@@ -79,9 +79,24 @@ local servers = {
     -- Rust
     rust_analyzer = {},
     -- C/C++
-    clangd = {},
+    clangd = {
+        cmd = {
+            "clangd",
+             -- This forces clang-format usage.
+            "--fallback-style=none",
+        },
+    },
     -- Python
     pyright = {},
+    ruff = { -- Python formatter and linter (fast, modern)
+        -- Ruff handles formatting and linting, pyright handles type checking
+        init_options = {
+            settings = {
+                -- Configure ruff to format code
+                args = {},
+            },
+        },
+    },
     -- Lua
     lua_ls = {
         Lua = {
@@ -92,6 +107,7 @@ local servers = {
             },
         },
     },
+    efm = {},
 }
 
 -- Tell lspconfig about blink.cmp
@@ -108,12 +124,12 @@ mason_lspconfig.setup({
     automatic_installation = false,
 })
 
-mason_lspconfig.setup_handlers({
-    function(server_name)
-        require('lspconfig')[server_name].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = servers[server_name],
-        })
-    end,
-})
+-- Configure servers using vim.lsp.config (new API in Neovim 0.11+)
+-- The server name is the first argument, config table is the second
+for server_name, server_config in pairs(servers) do
+    vim.lsp.config(server_name, {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = server_config,
+    })
+end

@@ -23,6 +23,9 @@ jlib.nmap('<Leader>n', ':NibblerToggle<Cr>')
 jlib.map('v', '<', '<gv', 'Indent left')
 jlib.map('v', '>', '>gv', 'Indent right')
 
+-- Go back one word with Q (opposite of W)
+vim.keymap.set({ "n", "v", "o" }, "Q", "B")
+
 -- undotree
 jlib.nmap('<Leader>u', vim.cmd.UndotreeToggle, "Undotree")
 

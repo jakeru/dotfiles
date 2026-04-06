@@ -110,6 +110,9 @@ return {
     {
         'nvim-treesitter/nvim-treesitter-context',
     },
+    {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+    },
     -- LSP
     {
         'neovim/nvim-lspconfig',
@@ -167,7 +170,7 @@ return {
         },
         config = function()
             require('columnize').setup()
-            vim.keymap.set("v", "<Leader>c", require('columnize').columnize,
+            vim.keymap.set("v", "<Leader>lc", require('columnize').columnize,
                 { desc = "Columnize selected lines" })
         end
     },

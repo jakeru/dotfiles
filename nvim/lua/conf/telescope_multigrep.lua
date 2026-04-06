@@ -12,6 +12,7 @@ local M = {}
 M.multigrep = function(opts)
     opts = opts or {}
     opts.cwd = opts.cwd or vim.uv.cwd()
+    opts.only_sort_text = true
 
     local finder = finders.new_async_job({
         command_generator = function(prompt)
